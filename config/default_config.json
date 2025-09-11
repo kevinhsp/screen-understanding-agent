@@ -1,0 +1,28 @@
+{
+  "processing": {
+    "ocr_language": "en",
+    "ocr_confidence_threshold": 0.5,
+    "element_detection_threshold": 0.3,
+    "merge_overlapping_elements": true,
+    "iou_threshold": 0.5,
+    "max_elements": 100
+  },
+  "models": {
+    "ocr_model": "PaddleOCR",
+    "element_detector": "OmniParser",
+    "vlm_model": "Qwen2.5-VL-7B-Instruct",
+    "use_multiple_vlms": false,
+    "vlm_max_tokens": 512,
+    "vlm_temperature": 0.7
+  },
+  "performance": {
+    "use_gpu": true,
+    "batch_size": 1,
+    "num_workers": 4
+  },
+  "output": {
+    "save_intermediate_results": false,
+    "debug_mode": false,
+    "output_format": "json"
+  }
+}

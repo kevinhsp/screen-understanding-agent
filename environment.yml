@@ -1,0 +1,66 @@
+name: screen-understanding
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  # Python version
+  - python=3.9
+  
+  # PyTorch and CUDA
+  - pytorch>=2.1.0
+  - torchvision>=0.16.0
+  - torchaudio>=2.1.0
+  - pytorch-cuda=11.8  # Adjust based on your CUDA version
+  - cudatoolkit=11.8
+  
+  # Core scientific packages
+  - numpy>=1.24.0
+  - scipy>=1.11.0
+  - pandas>=2.1.0
+  - matplotlib>=3.8.0
+  
+  # Image processing
+  - pillow>=10.1.0
+  - opencv>=4.8.0
+  
+  # Development tools
+  - pip>=23.3
+  - jupyter>=1.0.0
+  - ipython>=8.18.0
+  
+  # Additional conda packages
+  - tqdm>=4.66.0
+  - pyyaml>=6.0
+  
+  # Install remaining packages via pip
+  - pip:
+    # Hugging Face ecosystem
+    - transformers>=4.36.0
+    - accelerate>=0.25.0
+    - datasets>=2.16.0
+    - huggingface-hub>=0.20.0
+    - tokenizers>=0.15.0
+    - sentencepiece>=0.1.99
+    
+    # PaddleOCR (requires separate installation)
+    - paddlepaddle>=2.5.0
+    - paddleocr>=2.7.0
+    
+    # Additional ML packages
+    - einops>=0.7.0
+    - timm>=0.9.12
+    
+    # Utilities
+    - pydantic>=2.5.0
+    - aiofiles>=23.2.1
+    - protobuf>=4.25.0
+    
+    # Development tools
+    - pytest>=7.4.0
+    - pytest-asyncio>=0.21.0
+    - black>=23.12.0
+    - isort>=5.13.0
+    - flake8>=6.1.0
+    - mypy>=1.8.0
