@@ -256,41 +256,68 @@ class ProcessingConfig:
     # OCR settings
     ocr_language: str = "en"
     ocr_confidence_threshold: float = 0.5
+    # Which OCR backend to use: auto | paddle | easyocr | trocr | tesseract | hybrid
+    ocr_backend: str = "auto"
     
     # OmniParser settings
     element_detection_threshold: float = 0.3
     merge_overlapping_elements: bool = True
     iou_threshold: float = 0.5
+    # OmniParser weights and source control
+    omniparser_weights_path: Optional[str] = 'models/omniparser/icon_detect/model.pt'  # local path to YOLO weights
+    omniparser_download_source: str = "hf"  # hf | github | none
+    omniparser_allow_download: bool = True
     
     # VLM settings
     vlm_model_name: str = "Qwen/Qwen2.5-VL-7B-Instruct"
     vlm_max_tokens: int = 512
     vlm_temperature: float = 0.7
     use_multiple_vlms: bool = False
-    
+    # VLM prompt/selection knobs
+    vlm_elements_max: int = 30
+    vlm_clickable_only: bool = True
+    vlm_min_label_len: int = 2
+    vlm_prompt_example: bool = True
+    vlm_json_tag: bool = True
+    # Freeform control: whether to include OCR texts as extra context
+    vlm_freeform_include_ocr: bool = False
+    # Minimal DW-state output (summary+actions from VLM freeform, elements from OmniParser)
+    dw_minimal_output: bool = False
+
     # Processing settings
     enable_entity_extraction: bool = True
     enable_affordance_detection: bool = True
     max_elements: int = 100
     debug_mode: bool = False
     save_intermediate_results: bool = False
-    
+
     # Performance settings
     use_gpu: bool = True
     batch_size: int = 1
     num_workers: int = 4
-    
+
     def to_dict(self) -> Dict[str, Any]:
         return {
             "ocr_language": self.ocr_language,
             "ocr_confidence_threshold": self.ocr_confidence_threshold,
+            "ocr_backend": self.ocr_backend,
             "element_detection_threshold": self.element_detection_threshold,
             "merge_overlapping_elements": self.merge_overlapping_elements,
             "iou_threshold": self.iou_threshold,
+            "omniparser_weights_path": self.omniparser_weights_path,
+            "omniparser_download_source": self.omniparser_download_source,
+            "omniparser_allow_download": self.omniparser_allow_download,
             "vlm_model_name": self.vlm_model_name,
             "vlm_max_tokens": self.vlm_max_tokens,
             "vlm_temperature": self.vlm_temperature,
             "use_multiple_vlms": self.use_multiple_vlms,
+            "vlm_elements_max": self.vlm_elements_max,
+            "vlm_clickable_only": self.vlm_clickable_only,
+            "vlm_min_label_len": self.vlm_min_label_len,
+            "vlm_prompt_example": self.vlm_prompt_example,
+            "vlm_json_tag": self.vlm_json_tag,
+            "vlm_freeform_include_ocr": self.vlm_freeform_include_ocr,
+            "dw_minimal_output": self.dw_minimal_output,
             "enable_entity_extraction": self.enable_entity_extraction,
             "enable_affordance_detection": self.enable_affordance_detection,
             "max_elements": self.max_elements,
