@@ -269,12 +269,12 @@ class ProcessingConfig:
     omniparser_allow_download: bool = True
     
     # VLM settings
-    vlm_model_name: str = "Qwen/Qwen2.5-VL-7B-Instruct"
+    vlm_model_name: str = "Qwen/Qwen2.5-VL-3B-Instruct"
     vlm_max_tokens: int = 512
     vlm_temperature: float = 0.7
     use_multiple_vlms: bool = False
     # VLM prompt/selection knobs
-    vlm_elements_max: int = 30
+    vlm_elements_max: int = 52
     vlm_clickable_only: bool = True
     vlm_min_label_len: int = 2
     vlm_prompt_example: bool = True
@@ -283,6 +283,10 @@ class ProcessingConfig:
     vlm_freeform_include_ocr: bool = False
     # Minimal DW-state output (summary+actions from VLM freeform, elements from OmniParser)
     dw_minimal_output: bool = False
+
+    # Decision agent settings
+    decider_enabled: bool = True
+    decider_model_name: str = "openai/gpt-oss-20b"
 
     # Processing settings
     enable_entity_extraction: bool = True
@@ -318,6 +322,8 @@ class ProcessingConfig:
             "vlm_json_tag": self.vlm_json_tag,
             "vlm_freeform_include_ocr": self.vlm_freeform_include_ocr,
             "dw_minimal_output": self.dw_minimal_output,
+            "decider_enabled": self.decider_enabled,
+            "decider_model_name": self.decider_model_name,
             "enable_entity_extraction": self.enable_entity_extraction,
             "enable_affordance_detection": self.enable_affordance_detection,
             "max_elements": self.max_elements,
