@@ -1,82 +1,65 @@
 # Screen Understanding System
 
-AI-powered screen understanding system using OCR, OmniParser, and Vision-Language Models.
+Input a UI screenshot → get:
+- an annotated PNG with clickable elements labeled, and
+- a minimal JSON describing each element’s likely action(s) and a page summary.
 
-## Features
+Optionally, a decision agent (GPT‑4‑OSS style LLM) picks exactly one element+action for a given task.
 
-- **OCR Recognition**: PaddleOCR v4/v5 for text extraction
-- **Element Detection**: OmniParser v2 for UI element detection
-- **VLM Analysis**: ScreenAI and other VLMs for screen understanding
-- **Entity Extraction**: Automatic extraction of dates, prices, emails, etc.
-- **Action Detection**: Identify possible user actions on the screen
+## Install
 
-## Installation
+Prereqs: Python 3.9, Conda. GPU recommended.
 
-1. Run the setup script:
-```bash
-bash setup.sh
 ```
-
-2. Activate the environment:
-```bash
+conda env create -f environment.yml
 conda activate screen-understanding
+# If needed for PaddleOCR
+# GPU: pip install paddlepaddle-gpu -i https://pypi.tuna.tsinghua.edu.cn/simple
+# CPU: pip install paddlepaddle -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-## Usage
+Place YOLO weights at `weights/icon_detect/model.pt` (or set `OMNIPARSER_WEIGHTS`/`omniparser_weights_path`).
 
-```python
-from pipeline import ScreenUnderstandingPipeline
-from models import ProcessingConfig
-from PIL import Image
+## Run (one‑liners)
 
-# Configure pipeline
-config = ProcessingConfig(
-    use_gpu=True,
-    vlm_model_name="google/screen-ai-v1.0"
-)
-
-# Initialize pipeline
-pipeline = ScreenUnderstandingPipeline(config)
-
-# Process image
-image = Image.open("screenshot.png")
-understanding = await pipeline.process(image)
-
-# Access results
-print(f"Screen type: {understanding.screen_type}")
-print(f"Summary: {understanding.summary}")
-for action in understanding.affordances:
-    print(f"Action: {action.description}")
+Linux/macOS (bash):
+```
+export IMAGE_PATH=examples/united_sample.png
+export DW="Select LAX as departure city"   # optional task for decision
+export DECIDER_MODEL=openai/gpt-oss-20b    # optional, default is this
+python pipeline.py
 ```
 
-## Project Structure
-
+Windows PowerShell:
 ```
-.
-├── models.py          # Data structures and types
-├── processors.py      # OCR, OmniParser, and VLM processors
-├── pipeline.py        # Main processing pipeline
-├── environment.yml    # Conda environment configuration
-├── pyproject.toml     # Poetry configuration (alternative)
-├── setup.sh          # Setup script
-├── data/             # Data directory
-│   ├── images/       # Input images
-│   └── outputs/      # Processing outputs
-├── models/           # Model storage
-│   ├── checkpoints/  # Model checkpoints
-│   └── huggingface/  # HuggingFace cache
-└── tests/            # Test files
+$env:IMAGE_PATH = "examples/united_sample.png"
+$env:DW = "Select LAX as departure city"
+$env:DECIDER_MODEL = "openai/gpt-oss-20b"
+python pipeline.py
 ```
 
-## Models
+Outputs are saved to `pipeline_outputs/`:
+- `<image>_screen_understanding_output.json`
+- `<image>_element_actions.png`
+- `<image>_decision.json` (if `DW`/`DW_TASK` is set)
 
-The system uses models from Hugging Face. On first run, models will be automatically downloaded.
+## What It Does
 
-### Available Models:
-- **OCR**: PaddleOCR v4/v5
-- **Element Detection**: OmniParser (Microsoft)
-- **VLM**: ScreenAI (Google), Qwen2-VL, InternVL 2.5
+- OCR + UI element detection (OmniParser/YOLO) to find on‑screen elements.
+- VLM (default: Qwen2‑VL) to classify likely actions per element and summarize the screen.
+- Decision agent (default model: `openai/gpt-oss-20b`) uses the summary + per‑element actions to choose one element/action that best satisfies your task.
+
+That’s it—install, set input image and optional task with env vars, run once, and inspect the JSON/PNG outputs.
+
+## Notes
+
+- Models download from Hugging Face on first use. Optional cache:
+```
+export HF_HOME=./models/huggingface
+```
+- You can change the VLM in code via `ProcessingConfig.vlm_model_name`.
+- `DW` and `DW_TASK` are both accepted for the task variable.
 
 ## License
 
-MIT License
+MIT
