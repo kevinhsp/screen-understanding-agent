@@ -276,7 +276,7 @@ class ProcessingConfig:
     # VLM prompt/selection knobs
     vlm_elements_max: int = 52
     vlm_clickable_only: bool = True
-    vlm_min_label_len: int = 2
+    vlm_min_label_len: int = 2 
     vlm_prompt_example: bool = True
     vlm_json_tag: bool = True
     # Freeform control: whether to include OCR texts as extra context
