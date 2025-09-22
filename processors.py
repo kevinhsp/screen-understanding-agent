@@ -1163,7 +1163,7 @@ class QwenVLMProcessor(VLMProcessor):
             raise
 
     # Context manager helpers so callers can ensure cleanup
-    def __enter__(self):
+    def __enter__(self): 
         return self
 
     def __exit__(self):
