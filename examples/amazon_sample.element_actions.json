@@ -1,0 +1,279 @@
+[
+  {
+    "element_id": "element_33",
+    "primary_action": "click",
+    "description": "Navigate to early Prime deals section.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_44",
+    "primary_action": "click",
+    "description": "Navigate to the section for early Prime deals.",
+    "secondary_actions": [
+      "click on 'Early Prime Deals' - Early Prime Deals"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_47",
+    "primary_action": "click",
+    "description": "Navigate to the Best Sellers section.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_42",
+    "primary_action": "click",
+    "description": "View additional deals.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_38",
+    "primary_action": "click",
+    "description": "Navigate to the Medical Care section.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_36",
+    "primary_action": "click",
+    "description": "View product details for BLACK+DECKER dustbuster.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_28",
+    "primary_action": "click",
+    "description": "View early Prime Deals.",
+    "secondary_actions": [
+      "Early Prime Deals"
+    ],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_6",
+    "primary_action": "click",
+    "description": "View details about the Dishwasher Cleaner product.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_3",
+    "primary_action": "click",
+    "description": "View details or purchase automotive replacement parts.",
+    "secondary_actions": [
+      "click on 'Automotive replacement parts'",
+      "click on 'View Details'"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_19",
+    "primary_action": "click",
+    "description": "View product details for Disposal Cleaner.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_25",
+    "primary_action": "click",
+    "description": "View home air purifiers.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_1",
+    "primary_action": "click",
+    "description": "View product details for DISPOSAL CLEANER TABLETS.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_8",
+    "primary_action": "click",
+    "description": "View product details or add to cart.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_32",
+    "primary_action": "click",
+    "description": "Continue shopping on Amazon Prime.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_23",
+    "primary_action": "click",
+    "description": "Navigate to the Kitchen Cleaners section.",
+    "secondary_actions": [
+      "click on 'Kitchen cleaners' - Kitchen cleaners"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "BLACK+DECKER dustbuster",
+    "primary_action": "click",
+    "description": "View product details for BLACK+DECKER dustbuster.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_24",
+    "primary_action": "click",
+    "description": "View details about the BLACK+DECKER dustbuster product.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_5",
+    "primary_action": "click",
+    "description": "View product details or add to cart.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_4",
+    "primary_action": "click",
+    "description": "View product details for the RAWZ pet food.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_15",
+    "primary_action": "click",
+    "description": "View details about the BLACK+DECKER dustbuster product.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_2",
+    "primary_action": "click",
+    "description": "View product details for the snack pack.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_18",
+    "primary_action": "click",
+    "description": "View cell phone cases and covers.",
+    "secondary_actions": [
+      "click on 'Cell phone cases & c...'"
+    ],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_10",
+    "primary_action": "click",
+    "description": "Navigate to the Tablets section.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_26",
+    "primary_action": "click",
+    "description": "View product details for the AFLO Disposal Cleaner & Deodorizer.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_13",
+    "primary_action": "click",
+    "description": "View product details for Infiniti Clean Disposal Cleanser + Freshener.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_40",
+    "primary_action": "click",
+    "description": "View details of the Fanttik Slim V8 APEX C...",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_46",
+    "primary_action": "click",
+    "description": "View product details for the phone case.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_50",
+    "primary_action": "click",
+    "description": "View product details for the phone case.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_11",
+    "primary_action": "click",
+    "description": "Navigate to the Amazon Haul section.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_9",
+    "primary_action": "click",
+    "description": "Access Amazon Prime membership details.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_7",
+    "primary_action": "click",
+    "description": "Access account details and lists.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_16",
+    "primary_action": "click",
+    "description": "View and manage shopping cart contents.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_39",
+    "primary_action": "click",
+    "description": "Click to continue shopping.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_12",
+    "primary_action": "click",
+    "description": "Navigate to Same-Day Delivery section.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_14",
+    "primary_action": "click",
+    "description": "Access returns and orders management.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_29",
+    "primary_action": "click",
+    "description": "Navigate to the Early Prime Deals section.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  },
+  {
+    "element_id": "element_48",
+    "primary_action": "click",
+    "description": "Navigate to the next section or page.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  },
+  {
+    "element_id": "element_17",
+    "primary_action": "click",
+    "description": "Change language settings to English.",
+    "secondary_actions": [],
+    "confidence": 0.95
+  }
+]

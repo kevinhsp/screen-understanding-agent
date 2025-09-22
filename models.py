@@ -264,7 +264,7 @@ class ProcessingConfig:
     merge_overlapping_elements: bool = True
     iou_threshold: float = 0.5
     # OmniParser weights and source control
-    omniparser_weights_path: Optional[str] = 'models/omniparser/icon_detect/model.pt'  # local path to YOLO weights
+    omniparser_weights_path: Optional[str] = 'weights/icon_detect/model.pt'  # local path to YOLO weights
     omniparser_download_source: str = "hf"  # hf | github | none
     omniparser_allow_download: bool = True
     

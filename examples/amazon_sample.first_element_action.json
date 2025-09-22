@@ -1,0 +1,9 @@
+[
+  {
+    "element_id": "element_9",
+    "primary_action": "click",
+    "description": "Access Amazon Prime membership details.",
+    "secondary_actions": [],
+    "confidence": 0.9
+  }
+]

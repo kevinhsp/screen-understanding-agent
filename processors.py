@@ -20,10 +20,7 @@ from transformers import (
     BitsAndBytesConfig
 )
 # YOLO is lazily imported where needed to reduce import-time failures
-import cv2
-import requests
 from pathlib import Path
-
 from models import (
     OCRResult, UIElement, BoundingBox, ElementRole, ElementState,
     Affordance, ExtractedEntity, ScreenType, ActionType, ProcessingConfig
@@ -32,8 +29,6 @@ from models import (
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-
 # ============= OCR Module =============
 
 class OCRProcessor(ABC):
@@ -1171,7 +1166,7 @@ class QwenVLMProcessor(VLMProcessor):
     def __enter__(self):
         return self
 
-    def __exit__(self, exc_type, exc, tb):
+    def __exit__(self):
         try:
             self.unload()
         except Exception:
@@ -1330,7 +1325,7 @@ class QwenVLMProcessor(VLMProcessor):
                                        elements: List[UIElement],
                                        ocr_results: List[OCRResult],
                                        summary_actions:Dict[str, Any] = {},
-                                       max_k: int = 32) -> List[Dict[str, Any]]:
+                                       max_k: int = 52) -> List[Dict[str, Any]]:
         """Classify primary actions per element using the cropped region image.
 
         For each candidate element, crop a tight region around its bounding box
@@ -1379,7 +1374,7 @@ class QwenVLMProcessor(VLMProcessor):
 
         total = len(cands)
         _progress(f"[VLM actions] analyzing {total} clickable elements (max_k={max_k})")
-
+        last = len(cands) - 1
         for idx, el in enumerate(cands, start=1):
             b = el.bbox
             pad_x = max(4, int(0.1 * b.width))
@@ -1464,6 +1459,12 @@ class QwenVLMProcessor(VLMProcessor):
                 'secondary_actions': sec,
                 'confidence': conf,
             })
+            # if(idx == last):
+            #     for k in ("input_ids","pixel_values","attention_mask","labels"):
+            #         if k in inputs:
+            #             del inputs[k]
+            #     del inputs
+            #     del out_ids
 
         return results
 
@@ -1622,7 +1623,7 @@ class QwenVLMProcessor(VLMProcessor):
             pool = [e for e in pool if len((e.text or e.attributes.get('description') or '').strip()) >= min_len]
         if getattr(self.config, 'vlm_clickable_only', False):
             pool = [e for e in pool if e.clickable]
-        limit = int(self.config.vlm_elements_max or 30)
+        limit = int(self.config.vlm_elements_max or 52)
         return pool[:limit]
 
     def _regex_entities(self, texts: List[str], elements: List[UIElement]) -> List[ExtractedEntity]:

@@ -1,0 +1,843 @@
+{
+  "summary": "The site is a travel booking platform, likely United Airlines or a similar airline. The page is focused on flight booking, with options to select from roundtrip or one-way flights, choose departure and destination cities, set dates, specify number of travelers, and select economy class. Key modules include top navigation with account, orders, cart, delivery location, and search bar, along with banners and categories promoting MileagePlus benefits.",
+  "affordance": [],
+  "elements": [
+    {
+      "element_id": "element_21",
+      "primary_action": "click",
+      "description": "Click on the 'Europe Cruises' button to explore cruise options.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 671,
+        "y": 1157,
+        "width": 1104,
+        "height": 143
+      },
+      "center": {
+        "x": 1223,
+        "y": 1228
+      }
+    },
+    {
+      "element_id": "element_2",
+      "primary_action": "click",
+      "description": "Click to find your travel credits",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 832,
+        "y": 912,
+        "width": 369,
+        "height": 87
+      },
+      "center": {
+        "x": 1016,
+        "y": 955
+      }
+    },
+    {
+      "element_id": "element_7",
+      "primary_action": "click",
+      "description": "Click to find available flights.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 832,
+        "y": 821,
+        "width": 369,
+        "height": 77
+      },
+      "center": {
+        "x": 1016,
+        "y": 859
+      }
+    },
+    {
+      "element_id": "element_5",
+      "primary_action": "click",
+      "description": "Select adult passenger option",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 832,
+        "y": 601,
+        "width": 358,
+        "height": 73
+      },
+      "center": {
+        "x": 1011,
+        "y": 637
+      }
+    },
+    {
+      "element_id": "element_4",
+      "primary_action": "click",
+      "description": "Select departure city",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 402,
+        "y": 467,
+        "width": 358,
+        "height": 70
+      },
+      "center": {
+        "x": 581,
+        "y": 502
+      }
+    },
+    {
+      "element_id": "element_10",
+      "primary_action": "click",
+      "description": "Select date range for flight booking",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 398,
+        "y": 605,
+        "width": 360,
+        "height": 69
+      },
+      "center": {
+        "x": 578,
+        "y": 639
+      }
+    },
+    {
+      "element_id": "element_8",
+      "primary_action": "click",
+      "description": "Select Economy class for flight booking",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 399,
+        "y": 756,
+        "width": 359,
+        "height": 69
+      },
+      "center": {
+        "x": 578,
+        "y": 790
+      }
+    },
+    {
+      "element_id": "element_9",
+      "primary_action": "click",
+      "description": "Select Los Angeles LAX as departure city",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 833,
+        "y": 468,
+        "width": 359,
+        "height": 69
+      },
+      "center": {
+        "x": 1012,
+        "y": 502
+      }
+    },
+    {
+      "element_id": "element_40",
+      "primary_action": "click",
+      "description": "Click to access advanced search options.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 399,
+        "y": 824,
+        "width": 360,
+        "height": 54
+      },
+      "center": {
+        "x": 579,
+        "y": 851
+      }
+    },
+    {
+      "element_id": "element_38",
+      "primary_action": "click",
+      "description": "Click to book a hotel or car.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 715,
+        "y": 260,
+        "width": 257,
+        "height": 72
+      },
+      "center": {
+        "x": 843,
+        "y": 296
+      }
+    },
+    {
+      "element_id": "element_1",
+      "primary_action": "click",
+      "description": "Click to book a package",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 367,
+        "y": 167,
+        "width": 218,
+        "height": 76
+      },
+      "center": {
+        "x": 476,
+        "y": 205
+      }
+    },
+    {
+      "element_id": "element_6",
+      "primary_action": "click",
+      "description": "Click to check-in for your flight.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 791,
+        "y": 167,
+        "width": 220,
+        "height": 75
+      },
+      "center": {
+        "x": 901,
+        "y": 204
+      }
+    },
+    {
+      "element_id": "element_11",
+      "primary_action": "click",
+      "description": "Click to view past bookings.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1006,
+        "y": 167,
+        "width": 219,
+        "height": 75
+      },
+      "center": {
+        "x": 1115,
+        "y": 204
+      }
+    },
+    {
+      "element_id": "element_3",
+      "primary_action": "click",
+      "description": "View flight status details",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 580,
+        "y": 167,
+        "width": 216,
+        "height": 75
+      },
+      "center": {
+        "x": 688,
+        "y": 204
+      }
+    },
+    {
+      "element_id": "element_23",
+      "primary_action": "click",
+      "description": "Click on the 'Flexible Cruise' icon to explore cruise options.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 968,
+        "y": 259,
+        "width": 212,
+        "height": 72
+      },
+      "center": {
+        "x": 1074,
+        "y": 295
+      }
+    },
+    {
+      "element_id": "element_0",
+      "primary_action": "click",
+      "description": "Click to sign in to your account.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1605,
+        "y": 229,
+        "width": 202,
+        "height": 75
+      },
+      "center": {
+        "x": 1706,
+        "y": 266
+      }
+    },
+    {
+      "element_id": "element_19",
+      "primary_action": "click",
+      "description": "Click on 'Packages' to view available travel packages.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 506,
+        "y": 263,
+        "width": 195,
+        "height": 69
+      },
+      "center": {
+        "x": 603,
+        "y": 297
+      }
+    },
+    {
+      "element_id": "element_14",
+      "primary_action": "click",
+      "description": "Accept cookies for website functionality",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 2000,
+        "y": 1430,
+        "width": 179,
+        "height": 54
+      },
+      "center": {
+        "x": 2089,
+        "y": 1457
+      }
+    },
+    {
+      "element_id": "element_25",
+      "primary_action": "click",
+      "description": "Select Book with miles option",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 751,
+        "y": 359,
+        "width": 207,
+        "height": 43
+      },
+      "center": {
+        "x": 854,
+        "y": 380
+      }
+    },
+    {
+      "element_id": "element_22",
+      "primary_action": "click",
+      "description": "Select flexible date options for booking.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 985,
+        "y": 358,
+        "width": 188,
+        "height": 45
+      },
+      "center": {
+        "x": 1079,
+        "y": 380
+      }
+    },
+    {
+      "element_id": "element_31",
+      "primary_action": "click",
+      "description": "Click to change language to English (US $)",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 1734,
+        "y": 35,
+        "width": 188,
+        "height": 44
+      },
+      "center": {
+        "x": 1828,
+        "y": 57
+      }
+    },
+    {
+      "element_id": "element_15",
+      "primary_action": "click",
+      "description": "Click to access feedback section",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 2390,
+        "y": 700,
+        "width": 58,
+        "height": 138
+      },
+      "center": {
+        "x": 2419,
+        "y": 769
+      }
+    },
+    {
+      "element_id": "element_13",
+      "primary_action": "click",
+      "description": "Click on the 'Flight' icon to proceed with booking.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 399,
+        "y": 263,
+        "width": 110,
+        "height": 70
+      },
+      "center": {
+        "x": 454,
+        "y": 298
+      }
+    },
+    {
+      "element_id": "element_18",
+      "primary_action": "click",
+      "description": "Select one-way flight option",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 571,
+        "y": 357,
+        "width": 152,
+        "height": 48
+      },
+      "center": {
+        "x": 647,
+        "y": 381
+      }
+    },
+    {
+      "element_id": "element_16",
+      "primary_action": "click",
+      "description": "Click to book a flight.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 361,
+        "y": 19,
+        "width": 86,
+        "height": 82
+      },
+      "center": {
+        "x": 404,
+        "y": 60
+      }
+    },
+    {
+      "element_id": "element_20",
+      "primary_action": "click",
+      "description": "Select roundtrip option for flights",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 400,
+        "y": 358,
+        "width": 160,
+        "height": 44
+      },
+      "center": {
+        "x": 480,
+        "y": 380
+      }
+    },
+    {
+      "element_id": "element_43",
+      "primary_action": "none",
+      "description": "",
+      "secondary_actions": [],
+      "confidence": 0.7,
+      "bbox": {
+        "x": 803,
+        "y": 38,
+        "width": 153,
+        "height": 39
+      },
+      "center": {
+        "x": 879,
+        "y": 57
+      }
+    },
+    {
+      "element_id": "element_29",
+      "primary_action": "click",
+      "description": "Join MileagePlus program",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1668,
+        "y": 536,
+        "width": 179,
+        "height": 33
+      },
+      "center": {
+        "x": 1757,
+        "y": 552
+      }
+    },
+    {
+      "element_id": "element_27",
+      "primary_action": "click",
+      "description": "Click on the multi-city fees for optional services link.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 403,
+        "y": 954,
+        "width": 204,
+        "height": 26
+      },
+      "center": {
+        "x": 505,
+        "y": 967
+      }
+    },
+    {
+      "element_id": "element_24",
+      "primary_action": "click",
+      "description": "Click on the 'Certificates' icon to view baggage rules.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 403,
+        "y": 921,
+        "width": 155,
+        "height": 29
+      },
+      "center": {
+        "x": 480,
+        "y": 935
+      }
+    },
+    {
+      "element_id": "element_17",
+      "primary_action": "click",
+      "description": "Click to view privacy policy details.",
+      "secondary_actions": [
+        "read",
+        "scroll"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1674,
+        "y": 1434,
+        "width": 140,
+        "height": 30
+      },
+      "center": {
+        "x": 1744,
+        "y": 1449
+      }
+    },
+    {
+      "element_id": "element_41",
+      "primary_action": "click",
+      "description": "Click to book a flight",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 456,
+        "y": 35,
+        "width": 87,
+        "height": 48
+      },
+      "center": {
+        "x": 499,
+        "y": 59
+      }
+    },
+    {
+      "element_id": "element_34",
+      "primary_action": "click",
+      "description": "Click to access help information.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1061,
+        "y": 37,
+        "width": 89,
+        "height": 46
+      },
+      "center": {
+        "x": 1105,
+        "y": 60
+      }
+    },
+    {
+      "element_id": "element_33",
+      "primary_action": "click",
+      "description": "Close the pop-up window",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 2007,
+        "y": 139,
+        "width": 61,
+        "height": 67
+      },
+      "center": {
+        "x": 2037,
+        "y": 172
+      }
+    },
+    {
+      "element_id": "element_12",
+      "primary_action": "click",
+      "description": "Click to proceed to the next step in the booking process.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 770,
+        "y": 476,
+        "width": 50,
+        "height": 54
+      },
+      "center": {
+        "x": 795,
+        "y": 503
+      }
+    },
+    {
+      "element_id": "element_26",
+      "primary_action": "click",
+      "description": "Click the search icon to start searching for flights.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1927,
+        "y": 31,
+        "width": 46,
+        "height": 51
+      },
+      "center": {
+        "x": 1950,
+        "y": 56
+      }
+    },
+    {
+      "element_id": "element_30",
+      "primary_action": "click",
+      "description": "Close the pop-up window",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 2398,
+        "y": 1397,
+        "width": 47,
+        "height": 48
+      },
+      "center": {
+        "x": 2421,
+        "y": 1421
+      }
+    },
+    {
+      "element_id": "element_28",
+      "primary_action": "click",
+      "description": "Click on the icon to access your account.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1977,
+        "y": 34,
+        "width": 47,
+        "height": 45
+      },
+      "center": {
+        "x": 2000,
+        "y": 56
+      }
+    },
+    {
+      "element_id": "element_32",
+      "primary_action": "click",
+      "description": "Click on the shopping cart icon to view your bookings.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 2029,
+        "y": 38,
+        "width": 45,
+        "height": 42
+      },
+      "center": {
+        "x": 2051,
+        "y": 59
+      }
+    },
+    {
+      "element_id": "element_42",
+      "primary_action": "click",
+      "description": "Close the pop-up window",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 2403,
+        "y": 1405,
+        "width": 43,
+        "height": 43
+      },
+      "center": {
+        "x": 2424,
+        "y": 1426
+      }
+    },
+    {
+      "element_id": "element_36",
+      "primary_action": "click",
+      "description": "Click on the icon to proceed with booking.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1874,
+        "y": 593,
+        "width": 25,
+        "height": 29
+      },
+      "center": {
+        "x": 1886,
+        "y": 607
+      }
+    },
+    {
+      "element_id": "element_35",
+      "primary_action": "click",
+      "description": "Click on the icon to proceed with booking.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1911,
+        "y": 593,
+        "width": 24,
+        "height": 28
+      },
+      "center": {
+        "x": 1923,
+        "y": 607
+      }
+    },
+    {
+      "element_id": "element_37",
+      "primary_action": "click",
+      "description": "Click on the icon to proceed with booking.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1947,
+        "y": 593,
+        "width": 25,
+        "height": 26
+      },
+      "center": {
+        "x": 1959,
+        "y": 606
+      }
+    },
+    {
+      "element_id": "element_39",
+      "primary_action": "click",
+      "description": "Click on the icon to proceed with booking.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1982,
+        "y": 595,
+        "width": 25,
+        "height": 24
+      },
+      "center": {
+        "x": 1994,
+        "y": 607
+      }
+    }
+  ],
+  "processing_time_s": 91.95484161376953
+}

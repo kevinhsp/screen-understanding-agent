@@ -1,4 +1,4 @@
-"""
+﻿"""
 pipeline.py - Main screen understanding pipeline orchestrator
 """
 
@@ -19,6 +19,7 @@ from processors import (
     PaddleOCRProcessor, OmniParserV2, ScreenAIProcessor, 
     MultiVLMProcessor, OCRProcessor, VLMProcessor
 )
+from decision_agent import DecisionAgent
 import re
 import os
 import importlib
@@ -74,8 +75,21 @@ class ScreenUnderstandingPipeline:
                 self.vlm_processor = QwenVLMProcessor(self.config)
             except Exception as e:
                 logger.error(f"VLM selection failed for model '{raw}': {e}")
-        
+
         logger.info("All components initialized successfully")
+
+        # Optionally preload the decision agent (GPT) at startup
+        self.decision_agent = None
+        try:
+            if getattr(self.config, 'decider_enabled', False):
+                from decision_agent import DecisionAgent
+                self.decision_agent = DecisionAgent(
+                    model_name=getattr(self.config, 'decider_model_name', 'openai/gpt-oss-20b'),
+                    use_gpu=self.config.use_gpu,
+                )
+                logger.info("DecisionAgent initialized and ready")
+        except Exception as e:
+            logger.warning(f"DecisionAgent preload failed (will attempt later if needed): {e}")
 
     def _init_ocr_backend(self) -> OCRProcessor:
         """Initialize OCR backend based on config, with graceful fallbacks."""
@@ -129,7 +143,7 @@ class ScreenUnderstandingPipeline:
     
     async def process(self, 
                      image: Image.Image, 
-                     image_path: Optional[str] = None) -> ScreenUnderstanding:
+                     image_path: Optional[str] = None) -> Dict[str, Any]:
         """
         Process a screen image and return understanding results
         
@@ -138,7 +152,7 @@ class ScreenUnderstandingPipeline:
             image_path: Optional path to the image file
             
         Returns:
-            ScreenUnderstanding object with complete analysis
+            Minimal screen understanding dict with keys: summary, affordance, elements
         """
         start_time = time.time()
         logger.info(f"Starting screen understanding pipeline...")
@@ -152,32 +166,89 @@ class ScreenUnderstandingPipeline:
         
         try:
             # Step 1: OCR Recognition
-            ocr_results = await self._run_ocr(image)
+            ocr = await self._run_ocr(image)
             
             # Step 2/3: Element Detection (+ optional fused SOM-like pipeline)
-            elements = await self._detect_elements(image)
+            elems = await self._detect_elements(image)
             # Step 3: Merge OCR with Elements
-            elements = await self._merge_ocr_elements(elements, ocr_results)
+            merged = await self._merge_ocr_elements(elems, ocr)
             
-            # Step 4: VLM Analysis
-            vlm_analysis = await self._run_vlm_analysis(image, ocr_results, elements)
-            
-            # Step 5: Create final understanding
+            # Step 4: VLM Analysis (summary + per-element actions)
+            summary_actions = await self._run_vlm_generate_summary_actions(image)
+            actions = await self._run_vlm_classify_element_actions(
+                image, merged, ocr, summary_actions, max_k=self.config.vlm_elements_max
+            )
+
+            # Enrich actions with element coordinates for automation (bbox + center)
+            try:
+                id_to_elem = {e.id: e for e in merged if getattr(e, 'id', None)}
+                for a in actions:
+                    eid = a.get('element_id')
+                    el = id_to_elem.get(eid)
+                    if not el:
+                        continue
+                    b = el.bbox
+                    a['bbox'] = {
+                        'x': int(b.x), 'y': int(b.y), 'width': int(b.width), 'height': int(b.height)
+                    }
+                    a['center'] = {
+                        'x': int(b.x + b.width // 2),
+                        'y': int(b.y + b.height // 2),
+                    }
+            except Exception as e:
+                logger.warning(f"Failed to attach element coordinates: {e}")
+
+            # Step 5: Create final minimal understanding
             understanding = self._create_understanding(
-                vlm_analysis, elements, ocr_results, time.time() - start_time
+                summary_actions, actions, time.time() - start_time
             )
             
-            # Save intermediate results if configured
-            if self.config.save_intermediate_results:
-                await self._save_intermediate_results(
-                    image_path or "unknown",
-                    ocr_results,
-                    elements,
-                    vlm_analysis,
-                    understanding
-                )
-            
-            logger.info(f"Pipeline completed in {understanding.processing_time_ms:.2f}ms")
+            # Save annotated PNG of element actions similar to tests_slow/test_element_actions_vlm.py
+            try:
+                if image_path:
+                    from PIL import ImageDraw, ImageFont
+                    a_by_id = {a.get('element_id'): a for a in (actions or []) if a.get('element_id')}
+                    annotated = image.convert('RGB').copy()
+                    draw = ImageDraw.Draw(annotated)
+                    try:
+                        font = ImageFont.load_default()
+                    except Exception:
+                        font = None
+                    for el in merged:
+                        if not getattr(el, 'clickable', False):
+                            continue
+                        b = el.bbox
+                        x1, y1, x2, y2 = b.x, b.y, b.x + b.width, b.y + b.height
+                        color = (255, 0, 0)
+                        draw.rectangle([x1, y1, x2, y2], outline=color, width=2)
+                        act = a_by_id.get(el.id, {})
+                        label = el.id[8:] if isinstance(el.id, str) and len(el.id) > 8 else el.id
+                        pa = act.get('primary_action') if isinstance(act, dict) else None
+                        desc = act.get('description') if isinstance(act, dict) else None
+                        if pa:
+                            label += f"-{pa}"
+                        if desc:
+                            s = desc if len(desc) <= 40 else (desc[:37] + '...')
+                            label += f"·{s}"
+                        try:
+                            tw = draw.textlength(label, font=font)
+                            th = font.size if font else 12
+                        except Exception:
+                            tw, th = len(label) * 6, 12
+                        pad = 2
+                        bg = [x1, max(0, y1 - th - 2 * pad), x1 + int(tw) + 2 * pad, y1]
+                        draw.rectangle(bg, fill=color)
+                        draw.text((x1 + pad, max(0, y1 - th - pad)), label, fill=(255, 255, 255), font=font)
+                    out_dir = Path("pipeline_outputs")
+                    out_dir.mkdir(exist_ok=True)
+                    base = Path(image_path).stem
+                    png_path = out_dir / f"{base}_element_actions.png"
+                    annotated.save(png_path, format='PNG')
+                    logger.info(f"Annotated actions PNG saved to {png_path}")
+            except Exception as e:
+                logger.warning(f"Failed to save annotated PNG: {e}")
+
+            logger.info(f"Pipeline completed in {understanding.get('processing_time_s', 0):.2f}s")
             return understanding
             
         except Exception as e:
@@ -250,6 +321,20 @@ class ScreenUnderstandingPipeline:
         
         return merged_elements
     
+    async def _run_vlm_classify_element_actions(self,
+                                       image: Image.Image,
+                                       elements: List[UIElement],
+                                       ocr_results: List[OCRResult],
+                                       summary_actions:Dict[str, Any] = {},
+                                       max_k: int = 52) -> List[Dict[str, Any]]:
+        return await self.vlm_processor.classify_element_actions(
+            image, elements, ocr_results, summary_actions, max_k=max_k
+        )
+    
+    async def _run_vlm_generate_summary_actions(self,
+                                       image: Image.Image)-> Dict[str, Any]:
+        return await self.vlm_processor.generate_summary_actions(image)
+    
     async def _run_vlm_analysis(self, 
                                 image: Image.Image,
                                 ocr_results: List[OCRResult],
@@ -297,214 +382,32 @@ class ScreenUnderstandingPipeline:
         
         return analysis
 
-    def _parse_freeform_summary_actions(self, text: str) -> (str, List[Affordance]):
-        """Parse freeform output into summary text and Affordance list.
 
-        Heuristics:
-        - Summary: lines before the first bullet/action line.
-        - Actions: lines starting with '-', '•', '–' or containing ' - ' / ' – '.
-        """
-        lines = [l.rstrip() for l in text.splitlines()]
-        # Identify action lines
-        def is_action_line(l: str) -> bool:
-            s = l.strip()
-            return s.startswith(('-', '•', '–')) or ' - ' in s or ' – ' in s
-
-        first_action_idx = next((i for i, l in enumerate(lines) if is_action_line(l)), None)
-        if first_action_idx is None:
-            summary = text.strip()
-            actions: List[Affordance] = []
-            return summary, actions
-
-        summary_lines = [l.strip() for l in lines[:first_action_idx] if l.strip()]
-        summary = ' '.join(summary_lines).strip()
-
-        action_lines = [l.strip() for l in lines[first_action_idx:] if is_action_line(l)]
-        affordances: List[Affordance] = []
-        for ln in action_lines:
-            s = ln.lstrip('-•–').strip()
-            # keep short target label after a dash if present
-            desc = s
-            affordances.append(Affordance(
-                action_type=ActionType.CLICK,
-                target_element=None,
-                description=desc,
-                priority=8
-            ))
-        # Deduplicate by description
-        seen = set()
-        uniq: List[Affordance] = []
-        for a in affordances:
-            key = a.description.strip().lower()
-            if key in seen:
-                continue
-            seen.add(key)
-            uniq.append(a)
-        return summary or text.strip(), uniq[:50]
-
-    def _extract_summary_after_label(self, text: str) -> Optional[str]:
-        """Extract the line immediately following a 'Summary:' label (case-insensitive).
-
-        Rules:
-        - If 'Summary:' appears with content on the same line, return content after ':' on that line.
-        - Else, return the first non-empty line immediately after the line that contains 'Summary:'.
-        - If not found, return None.
-        """
-        try:
-            if not isinstance(text, str):
-                return None
-            lines = text.splitlines()
-            for i, line in enumerate(lines):
-                if re.match(r"^\s*summary\s*:.*$", line, re.I):
-                    # Content on the same line after 'Summary:'
-                    m = re.match(r"^\s*summary\s*:\s*(.*)$", line, re.I)
-                    if m and m.group(1).strip():
-                        return m.group(1).strip()
-                    # Otherwise take next non-empty line
-                    j = i + 1
-                    while j < len(lines) and not lines[j].strip():
-                        j += 1
-                    if j < len(lines):
-                        return lines[j].strip()
-                    return None
-            return None
-        except Exception:
-            return None
-
-    def _strip_chat_preamble(self, text: str) -> str:
-        """Remove typical chat-template role markers from the beginning of text.
-
-        Handles plain markers (system/user/assistant) and special-token style
-        markers (<|im_start|>system ... <|im_end|> etc.). Returns stripped text.
-        """
-        if not isinstance(text, str):
-            return text
-        s = text
-        try:
-            # Remove plain 'system ... user' preface if echoed
-            s = re.sub(r"(?is)^\s*system\s+.*?\n\s*user\s+", "", s, count=1)
-            # Drop a leading 'assistant' label line if present
-            s = re.sub(r"(?im)^assistant\s*\n", "", s)
-            # Remove special token style roles
-            s = re.sub(r"(?is)<\|im_start\|>system.*?<\|im_end\|>\s*", "", s)
-            s = re.sub(r"(?is)<\|im_start\|>user\s*", "", s)
-            s = re.sub(r"(?is)<\|im_start\|>assistant\s*", "", s)
-        except Exception:
-            pass
-        return s.strip()
-
-    def _extract_summary_from_freeform(self, text: str) -> str:
-        """Extract the first natural-language summary paragraph from freeform output.
-
-        Heuristics:
-        - Skip instruction-like lines ("You are an expert", "Analyze the website", etc.)
-        - If a '1) Summary' header exists, start after it
-        - Stop when hitting the next numbered header (e.g., '2)') or a bullet/action line
-        - Fallback to first 2 sentences if nothing extracted
-        """
-        if not isinstance(text, str):
-            return str(text)
-        s = text.strip()
-        # If there's an explicit '1) Summary' header, start after it
-        m = re.search(r"(?im)^\s*1\)\s*summary.*?$", s)
-        if m:
-            s = s[m.end():].lstrip('\n')
-        lines = s.splitlines()
-        def is_action_line(l: str) -> bool:
-            t = l.strip()
-            return t.startswith(('-', '•', '–')) or ' - ' in t or ' – ' in t
-        def is_instruction(l: str) -> bool:
-            low = l.lower()
-            return any(k in low for k in [
-                'you are an expert', 'analyze the website', 'no code', 'no json', 'no markdown',
-                'return only', 'context ocr texts', 'high-confidence actions', 'high-confidence entities'
-            ]) or re.match(r"^\s*\d+\)\s*", l)
-        # If there's a literal 'Summary:' header, start after it
-        start_idx = 0
-        for i, l in enumerate(lines):
-            if re.match(r"^\s*summary\s*:?\s*$", l, re.I):
-                start_idx = i + 1
-                break
-        summary_lines = []
-        for l in lines[start_idx:]:
-            if not l.strip():
-                # keep paragraph spacing until we collected something
-                if summary_lines:
-                    break
-                continue
-            # Stop at next section or actions header
-            if re.match(r"^\s*2\)\b", l) or re.match(r"^\s*high[- ]?confidence\b", l, re.I):
-                break
-            if is_instruction(l) or is_action_line(l):
-                if summary_lines:
-                    break
-                else:
-                    continue
-            summary_lines.append(l.strip())
-        summary = ' '.join(summary_lines).strip()
-        # Remove a possible leading 'Summary:' prefix
-        summary = re.sub(r"(?i)^\s*summary\s*:\s*", "", summary).strip()
-        if summary:
-            return summary
-        # Fallback: take first 2 sentences
-        sentences = re.split(r"(?<=[.!?])\s+", s)
-        return ' '.join(sentences[:2]).strip()
     
     def _create_understanding(self,
-                            vlm_analysis: Dict[str, Any],
-                            elements: List[UIElement],
-                            ocr_results: List[OCRResult],
-                            processing_time: float) -> ScreenUnderstanding:
-        """Create final ScreenUnderstanding object"""
-        logger.info("Step 5: Creating final understanding...")
-        
-        # Extract components from VLM analysis
-        screen_type = vlm_analysis.get("screen_type", ScreenType.UNKNOWN)
-        summary = vlm_analysis.get("summary", "")
-        affordances = vlm_analysis.get("affordances", [])
-        entities = vlm_analysis.get("entities", [])
-        warnings = vlm_analysis.get("warnings", [])
-        
-        # Calculate confidence scores
-        confidence_scores = {
-            "overall": vlm_analysis.get("confidence", 0.0),
-            "ocr": sum(ocr.confidence for ocr in ocr_results) / len(ocr_results) if ocr_results else 0.0,
-            "element_detection": sum(e.confidence for e in elements) / len(elements) if elements else 0.0,
-            "vlm": vlm_analysis.get("confidence", 0.0)
+                            summary_actions: Dict[str, Any],
+                            element_actions: List[Dict[str, Any]],
+                            processing_time: float) -> Dict[str, Any]:
+        """Create final minimal understanding dict.
+
+        Output keys:
+          - summary: str
+          - affordance: List[str] (high-confidence actions)
+          - elements: List[Dict] with keys {element_id, primary_action, description, secondary_actions, confidence, bbox{x,y,width,height}, center{x,y}}
+        """
+        logger.info("Step 5: Creating final minimal understanding...")
+
+        result: Dict[str, Any] = {
+            "summary": str(summary_actions.get("summary", "")),
+            # Use singular key name as requested: "affordance"
+            "affordance": list(summary_actions.get("hc_actions", []) or []),
+            "elements": element_actions or [],
+            # Store processing time in seconds
+            "processing_time_s": float(processing_time),
         }
-        
-        # Create metadata
-        metadata = {
-            "image_size": None,  # Will be set if image provided
-            "ocr_text_count": len(ocr_results),
-            "element_count": len(elements),
-            "interactive_element_count": sum(1 for e in elements if e.is_interactive()),
-            "entity_count": len(entities),
-            "affordance_count": len(affordances),
-            "processing_stages": {
-                "ocr": type(self.ocr_processor).__name__,
-                "element_detection": "OmniParser",
-                "vlm": self.config.vlm_model_name
-            },
-            "freeform_text": vlm_analysis.get('__freeform_text') if isinstance(vlm_analysis, dict) else None
-        }
-        
-        # Create understanding object
-        understanding = ScreenUnderstanding(
-            screen_type=screen_type,
-            summary=summary,
-            affordances=affordances,
-            entities=entities,
-            elements=elements,
-            confidence_scores=confidence_scores,
-            metadata=metadata,
-            warnings=warnings,
-            processing_time_ms=processing_time * 1000
-        )
-        
-        logger.info(f"Understanding created: {screen_type.value} screen with {len(elements)} elements")
-        
-        return understanding
+
+        logger.info(f"Understanding created: {len(result.get('elements', []))} elements, {len(result.get('affordance', []))} affordances")
+        return result
     
     async def _save_intermediate_results(self,
                                         image_path: str,
@@ -539,44 +442,26 @@ class ScreenUnderstandingPipeline:
     
     async def process_batch(self, 
                            image_paths: List[str],
-                           save_results: bool = True) -> List[ScreenUnderstanding]:
+                           save_results: bool = True) -> List[Dict[str, Any]]:
         """Process multiple images in batch"""
         logger.info(f"Processing batch of {len(image_paths)} images...")
-        
-        results = []
+        results: List[Dict[str, Any]] = []
+        out_dir = Path("pipeline_outputs")
+        out_dir.mkdir(exist_ok=True)
         for idx, image_path in enumerate(image_paths):
             logger.info(f"Processing image {idx + 1}/{len(image_paths)}: {image_path}")
             
             try:
-                image = Image.open(image_path)
+                image = Image.open(image_path).convert('RGB')
                 understanding = await self.process(image, image_path)
                 results.append(understanding)
                 
                 if save_results:
-                    output_path = Path(image_path).with_suffix('.json')
+                    base = Path(image_path).stem if image_path else "output"
+                    output_path = out_dir / f"{base}_screen_understanding_output.json"
                     with open(output_path, 'w', encoding='utf-8') as f:
-                        if getattr(self.config, 'dw_minimal_output', False):
-                            minimal = {
-                                'summary': understanding.summary,
-                                'affordances': [a.to_dict() for a in understanding.affordances],
-                                'elements': [e.to_dict() for e in understanding.elements],
-                            }
-                            json.dump(minimal, f, indent=2, ensure_ascii=False)
-                        else:
-                            json.dump(understanding.to_dict(), f, indent=2, ensure_ascii=False)
+                        json.dump(understanding, f, indent=2, ensure_ascii=False)
                     logger.info(f"Results saved to {output_path}")
-
-                    # In minimal mode also save freeform raw text next to image for inspection
-                    if getattr(self.config, 'dw_minimal_output', False):
-                        free_text = understanding.metadata.get('freeform_text') if isinstance(understanding.metadata, dict) else None
-                        if free_text:
-                            txt_path = Path(image_path).with_suffix('.vlm_freeform.txt')
-                            try:
-                                with open(txt_path, 'w', encoding='utf-8') as tf:
-                                    tf.write(free_text)
-                                logger.info(f"Freeform VLM text saved to {txt_path}")
-                            except Exception as e:
-                                logger.warning(f"Failed to save freeform text to {txt_path}: {e}")
                     
             except Exception as e:
                 logger.error(f"Failed to process {image_path}: {str(e)}")
@@ -594,7 +479,7 @@ async def main():
     # Create configuration
     config = ProcessingConfig(
         ocr_language="en",
-        vlm_model_name="Qwen/Qwen2.5-VL-7B-Instruct",  # Replace with actual model
+        vlm_model_name="Qwen/Qwen2.5-VL-3B-Instruct",  # Replace with actual model
         use_gpu=True,
         debug_mode=True,
         save_intermediate_results=True,
@@ -607,55 +492,57 @@ async def main():
     pipeline = ScreenUnderstandingPipeline(config)
     
     # Process a single image
-    image_path = "examples/login_screen.png"  # Replace with actual image
+    image_path = "examples/united_sample.png"  # Replace with actual image
     
     # Create a sample image for testing
-    sample_image = Image.new('RGB', (1024, 768), color='white')
+    img = Image.open(image_path).convert('RGB')
     
     try:
         # Process the image
-        understanding = await pipeline.process(sample_image, "sample_image")
-        
-        # Print results
+        understanding = await pipeline.process(img, image_path)
+
+        # If minimal dict is returned, print and save accordingly, then exit
         print("\n" + "="*60)
-        print("SCREEN UNDERSTANDING RESULTS")
+        print("SCREEN UNDERSTANDING (MINIMAL)")
         print("="*60)
-        print(f"Screen Type: {understanding.screen_type.value}")
-        print(f"Summary: {understanding.summary}")
-        print(f"Processing Time: {understanding.processing_time_ms:.2f}ms")
-        print(f"Overall Confidence: {understanding.confidence_scores.get('overall', 0):.2%}")
+        print(f"Summary: {understanding.get('summary','')}")
+        print(f"Processing Time: {understanding.get('processing_time_s', 0):.2f}s")
+        print(f"Affordance count: {len(understanding.get('affordance', []))}")
+        print(f"Elements (actions) count: {len(understanding.get('elements', []))}")
+        # Save JSON under pipeline_outputs/<basename>_screen_understanding_output.json
+        out_dir = Path("pipeline_outputs")
+        out_dir.mkdir(exist_ok=True)
+        base = Path(image_path).stem if image_path else "output"
+        output_path = out_dir / f"{base}_screen_understanding_output.json"
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(understanding, f, indent=2, ensure_ascii=False)
+        print(f"\nComplete results saved to {output_path}")
+        # pipeline.vlm_processor.__exit__()
+        # Optional: decision step using openai/gpt-oss-20b when a DW_TASK is provided
+        task = os.environ.get('DW_TASK')
+        if task:
+            try:
+                # Reuse preloaded agent if available; otherwise create on the fly
+                agent = getattr(pipeline, 'decision_agent', None)
+                if agent is None:
+                    model_id = getattr(pipeline.config, 'decider_model_name', 'openai/gpt-oss-20b')
+                    agent = DecisionAgent(model_name=model_id, use_gpu=pipeline.config.use_gpu)
+                decision = agent.decide(understanding, task)
+                dec_path = out_dir / f"{base}_decision.json"
+                with open(dec_path, 'w', encoding='utf-8') as f:
+                    json.dump({
+                        'task': task,
+                        'decision': decision
+                    }, f, indent=2, ensure_ascii=False)
+                print(f"Decision saved to {dec_path}")
+            except Exception as e:
+                print(f"Decision step failed: {e}")
+        return
+
         
-        print("\n📋 DETECTED ELEMENTS:")
-        for elem in understanding.elements[:5]:
-            print(f"  • {elem.role.value}: {elem.text or '[no text]'} "
-                  f"({elem.state.value}) [conf: {elem.confidence:.2f}]")
-        
-        if len(understanding.elements) > 5:
-            print(f"  ... and {len(understanding.elements) - 5} more elements")
-        
-        print("\n🎯 POSSIBLE ACTIONS:")
-        for aff in understanding.get_high_priority_actions():
-            print(f"  • {aff.action_type.value}: {aff.description} "
-                  f"[priority: {aff.priority}]")
-        
-        print("\n📊 EXTRACTED ENTITIES:")
-        for entity in understanding.entities[:10]:
-            print(f"  • {entity.entity_type}: {entity.value} "
-                  f"[conf: {entity.confidence:.2f}]")
-        
-        if understanding.warnings:
-            print("\n⚠️ WARNINGS:")
-            for warning in understanding.warnings:
-                print(f"  • {warning}")
-        
-        # Export to JSON
-        output_file = "screen_understanding_output.json"
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(understanding.to_dict(), f, indent=2, ensure_ascii=False)
-        print(f"\n✅ Complete results saved to {output_file}")
         
     except Exception as e:
-        print(f"\n❌ Pipeline failed: {str(e)}")
+        print(f"\nPipeline failed: {str(e)}")
         raise
 
 
