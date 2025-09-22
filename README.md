@@ -62,4 +62,10 @@ export HF_HOME=./models/huggingface
 
 ## License
 
-MIT
+AGPL-3.0-only. See `LICENSE`.
+
+Third‑party components retain their own licenses:
+- Detector (Ultralytics/YOLO icon_detect): AGPL‑3.0 or commercial license
+- VLM (e.g., Qwen/Qwen2.5‑VL): Qwen Model License (Alibaba)
+- Decision model (e.g., openai/gpt‑oss‑20b): see model card/license
+- OCR (PaddleOCR/PaddlePaddle): Apache‑2.0
