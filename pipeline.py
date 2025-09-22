@@ -491,8 +491,8 @@ async def main():
     # Initialize pipeline
     pipeline = ScreenUnderstandingPipeline(config)
     
-    # Process a single image
-    image_path = "examples/united_sample.png"  # Replace with actual image
+    # Process a single image (allow override via env IMAGE_PATH)
+    image_path = os.environ.get('IMAGE_PATH') or "examples/united_sample.png"
     
     # Create a sample image for testing
     img = Image.open(image_path).convert('RGB')
@@ -519,13 +519,15 @@ async def main():
         print(f"\nComplete results saved to {output_path}")
         # pipeline.vlm_processor.__exit__()
         # Optional: decision step using openai/gpt-oss-20b when a DW_TASK is provided
-        task = os.environ.get('DW_TASK')
+        # Allow either DW or DW_TASK as the task variable name
+        task = os.environ.get('DW') or os.environ.get('DW_TASK')
         if task:
             try:
                 # Reuse preloaded agent if available; otherwise create on the fly
                 agent = getattr(pipeline, 'decision_agent', None)
                 if agent is None:
-                    model_id = getattr(pipeline.config, 'decider_model_name', 'openai/gpt-oss-20b')
+                    # Allow DECIDER_MODEL env override (default: openai/gpt-oss-20b)
+                    model_id = os.environ.get('DECIDER_MODEL') or getattr(pipeline.config, 'decider_model_name', 'openai/gpt-oss-20b')
                     agent = DecisionAgent(model_name=model_id, use_gpu=pipeline.config.use_gpu)
                 decision = agent.decide(understanding, task)
                 dec_path = out_dir / f"{base}_decision.json"
