@@ -3,7 +3,7 @@ test_pipeline.py - Unit tests for the screen understanding pipeline
 """
 
 import unittest
-import asyncio 
+import asyncio
 from PIL import Image
 import numpy as np
 
