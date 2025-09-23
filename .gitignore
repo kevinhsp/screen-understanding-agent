@@ -2,3 +2,10 @@ __pycache__/alternative_ocr.cpython-310.pyc
 __pycache__/decision_agent.cpython-310.pyc
 __pycache__/models.cpython-310.pyc
 __pycache__/processors.cpython-310.pyc
+__pycache__/pipeline.cpython-310.pyc
+/pipeline_outputs
+/pipeline_outputs
+/pipeline_outputs
+/pipeline_outputs
+pipeline_outputs/united_sample_element_actions.png
+pipeline_outputs/united_sample_screen_understanding_output.json

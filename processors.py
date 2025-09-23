@@ -767,12 +767,23 @@ class OmniParserV2:
                 prox_dist = 1e9
 
                 for ocr in ocr_results:
-                    # If OCR overlaps expanded box, prefer it
+                    # If OCR overlaps expanded box, consider it
                     if self._calculate_iou(expanded, ocr.bbox) > 0.0:
-                        # distance between centers
-                        cx1, cy1 = element.bbox.center()
-                        cx2, cy2 = ocr.bbox.center()
-                        d = (cx1 - cx2) ** 2 + (cy1 - cy2) ** 2
+                        # distance from OCR center to element box edges (0 if inside)
+                        ocx, ocy = ocr.bbox.center()
+                        ex1, ey1 = element.bbox.x, element.bbox.y
+                        ex2, ey2 = element.bbox.x + element.bbox.width, element.bbox.y + element.bbox.height
+                        dx = 0.0
+                        if ocx < ex1:
+                            dx = ex1 - ocx
+                        elif ocx > ex2:
+                            dx = ocx - ex2
+                        dy = 0.0
+                        if ocy < ey1:
+                            dy = ey1 - ocy
+                        elif ocy > ey2:
+                            dy = ocy - ey2
+                        d = dx * dx + dy * dy
                         if d < prox_dist:
                             prox_dist = d
                             prox_match = ocr
@@ -787,9 +798,23 @@ class OmniParserV2:
                 nearby = []
                 for ocr in ocr_results:
                     if self._calculate_iou(expanded, ocr.bbox) > 0.0:
-                        cx1, cy1 = element.bbox.center()
-                        cx2, cy2 = ocr.bbox.center()
-                        d = (cx1 - cx2) ** 2 + (cy1 - cy2) ** 2
+                        # Only consider texts OUTSIDE the element box for nearby_texts
+                        if self._calculate_iou(element.bbox, ocr.bbox) > 0.0:
+                            continue
+                        ocx, ocy = ocr.bbox.center()
+                        ex1, ey1 = element.bbox.x, element.bbox.y
+                        ex2, ey2 = element.bbox.x + element.bbox.width, element.bbox.y + element.bbox.height
+                        dx = 0.0
+                        if ocx < ex1:
+                            dx = ex1 - ocx
+                        elif ocx > ex2:
+                            dx = ocx - ex2
+                        dy = 0.0
+                        if ocy < ey1:
+                            dy = ey1 - ocy
+                        elif ocy > ey2:
+                            dy = ocy - ey2
+                        d = dx * dx + dy * dy
                         nearby.append((d, ocr))
                 nearby.sort(key=lambda t: t[0])
                 element.attributes['nearby_texts'] = [
@@ -1354,6 +1379,16 @@ class QwenVLMProcessor(VLMProcessor):
             "description(<=15 words), secondary_actions(array of strings), confidence(0..1)."
         )
 
+        # Strong rules to bias arrival/departure classification using nearest outside labels
+        rules = (
+            "Strong Labeling Rules (follow strictly; override all priors):\n"
+            "- If the nearest outside label contains any of [to, destination, arrive, arrival, inbound, 到, 目的地, 到达], classify this element as arrival.\n"
+            "- If it contains any of [from, origin, depart, departure, outbound, 出发, 起点, 出发地], classify this element as departure.\n"
+            "- If both appear, choose the one closer to the element box edge; if tie, prefer explicit forms (arrival/departure > to/from). If still ambiguous, set role='unknown'.\n"
+            "- Do not infer arrival/departure from airport codes or logos. Ignore global priors if they conflict with the nearest label.\n"
+            "- Text inside the element box (placeholder/value) is not a label; use nearest outside texts only.\n\n"
+        )
+
         results: List[Dict[str, Any]] = []
 
         try:
@@ -1392,8 +1427,37 @@ class QwenVLMProcessor(VLMProcessor):
                 f"{el.id}|role={role}|text={text_val[:60]}"
             )
 
+            # Provide nearby OCR texts to help disambiguate label association
+            nearby_top = ""
+            try:
+                nb = None
+                if isinstance(getattr(el, 'attributes', None), dict):
+                    nb = el.attributes.get('nearby_texts')
+                if isinstance(nb, list) and nb:
+                    texts = []
+                    for item in nb[:5]:
+                        t = str((item or {}).get('text') or '').strip()
+                        if t:
+                            texts.append(t)
+                    if texts:
+                        joined = " | ".join(texts)
+                        line = line + f"\nNearby texts (closest first): {joined}"
+                        nearby_top = f"Nearest outside texts: {joined}\n\n"
+                        # Debug log to confirm nearby texts are included in the VLM context
+                        if getattr(self.config, 'debug_mode', False):
+                            try:
+                                print(f"[VLM actions] {el.id} nearby_texts: {texts}")
+                                logger.info(f"[VLM actions] {el.id} nearby_texts: {texts}")
+                                print(f"[VLM actions] element line: {line}")
+                                logger.info(f"[VLM actions] element line: {line}")
+                            except Exception:
+                                pass
+            except Exception:
+                pass
+
             prompt = (
                 "You are an expert in webpage understanding. Given a webpage summary, high confidence actions and cropped region image of a clickable part of a webpage, decide what the user can do with this part. Describe as simple and clear as you can. Use English only and reference element id exactly.\n\n"
+                f"{nearby_top}"
                 f"Webpage summary:\n{summary_actions.get('summary','')}\n\n"
                 f"High‑Confidence Actions:\n{str(summary_actions.get('hc_actions',''))}\n\n"
                 f"Output schema: {schema}\n\nElement:\n{line}"
