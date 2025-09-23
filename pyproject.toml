@@ -5,6 +5,7 @@ description = "AI-powered screen understanding system using OCR, OmniParser and 
 authors = ["Your Name <your.email@example.com>"]
 readme = "README.md"
 python = "^3.9"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"

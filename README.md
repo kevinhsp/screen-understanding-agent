@@ -99,10 +99,10 @@ It is designed to be:
 ---
 
 ## 📜 License
-AGPL-3.0-only. See `LICENSE`.  
+MIT. See `LICENSE`.
 
-Third-party components retain their own licenses:  
-- Detector (Ultralytics/YOLO icon_detect): AGPL-3.0 or commercial license  
-- VLM (e.g., Qwen/Qwen2.5-VL): Qwen Model License (Alibaba)  
-- Decision model (e.g., openai/gpt-oss-20b): see model card/license  
-- OCR (PaddleOCR/PaddlePaddle): Apache-2.0  
+Third-party components retain their own licenses:
+- Detector weights/config under `weights/icon_detect/`: see `weights/icon_detect/LICENSE`
+- VLM (e.g., `Qwen/Qwen2.5-VL`): Qwen Model License (Alibaba)
+- Decision model (e.g., `openai/gpt-oss-20b`): see model card/license
+- OCR (PaddleOCR/PaddlePaddle): Apache-2.0
