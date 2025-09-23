@@ -1,10 +1,10 @@
-# 🚀 Digital World Agent: Robust Screen Understanding & Decision Pipeline
+#  Digital World Agent: Robust Screen Understanding & Decision Pipeline
 
 This project is a **prototype Digital World Agent**. It takes a **raw UI screenshot** and produces structured representations of the screen, reasoning traces, and even task-oriented decisions. The goal: **bridge perception and reasoning for robust UI automation**.
 
 ---
 
-## ✨ Features
+##  Features
 - **Screen Parsing** → Detect UI elements (YOLO / OmniParser) + OCR.
 - **Action Semantics** → VLM (default: Qwen2-VL) infers each element’s likely action(s) and provides a page summary.
 - **Decision Agent (optional)** → An LLM (default: GPT-OSS-20B) reasons over the elements and picks *one best element+action* for a given task, outputting a transparent “thinking trace.”
@@ -15,7 +15,7 @@ This project is a **prototype Digital World Agent**. It takes a **raw UI screens
 
 ---
 
-## 🔧 Installation
+##  Installation
 **Prereqs**: Python ≥3.9, Conda. GPU strongly recommended.  
 
 ```bash
@@ -30,7 +30,7 @@ weights/icon_detect/model.pt
 
 ---
 
-## ▶️ Quickstart (One-liners)
+##  Quickstart (One-liners)
 
 **Linux/macOS (bash):**
 ```bash
@@ -50,7 +50,7 @@ python pipeline.py
 
 ---
 
-## 📂 Outputs
+##  Outputs
 Saved under `pipeline_outputs/`:
 - `<image>_screen_understanding_output.json`  
 - `<image>_element_actions.png`  
@@ -67,7 +67,7 @@ Saved under `pipeline_outputs/`:
 
 ---
 
-## 🧠 How It Works
+##  How It Works
 1. **UI Element Detection** → YOLO / OmniParser finds visual components.  
 2. **VLM Classification** → Qwen2-VL assigns semantic actions (click, type, toggle…).  
 3. **Screen Summary** → VLM generates a concise global description.  
@@ -75,7 +75,7 @@ Saved under `pipeline_outputs/`:
 
 ---
 
-## 📌 Notes
+##  Notes
 - First run may download models from Hugging Face. Optional cache path:  
   ```bash
   export HF_HOME=./models/huggingface
@@ -85,7 +85,7 @@ Saved under `pipeline_outputs/`:
 
 ---
 
-## 🌍 Why This Matters
+##  Why This Matters
 This pipeline is a **first step towards robust Digital World AI agents**:  
 - Perception + Reasoning + (Optional) Action Selection  
 - Transparent reasoning traces (inspectable CoT)  
@@ -98,7 +98,7 @@ It is designed to be:
 
 ---
 
-## 📜 License
+##  License
 MIT. See `LICENSE`.
 
 Third-party components retain their own licenses:
