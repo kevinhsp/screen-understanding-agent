@@ -67,6 +67,31 @@ Saved under `pipeline_outputs/`:
 
 ---
 
+##  Interactive Session (Terminal)
+Run a step-by-step session entirely in the terminal, without manual renaming each time.
+
+- Entry: `session_cli.py`
+- Flow:
+  1) Enter the overall task (English).
+  2) A session folder is created under `pipeline_outputs/sessions/session_YYYYMMDD_HHMMSS/` and the task is saved to `task.txt`.
+  3) For step N, drop `N.png` into the session folder (`1.png`, `2.png`, ...).
+  4) The script processes the screenshot and saves:
+     - `step_N_screen_understanding.json`
+     - `step_N_element_actions.png` (if annotation is available)
+     - `step_N_decision.json`
+  5) Press Enter to continue; type `q` to quit any time.
+
+- Usage (all platforms):
+  - `python session_cli.py`
+  - Follow the on‑screen prompts.
+
+- Notes:
+  - Override the decision model with `DECIDER_MODEL` (default: `openai/gpt-oss-20b`).
+  - You can resume later by adding `3.png`, `4.png`, etc. into the same session folder and running the tool again.
+  - Uses the same OCR → element detection → VLM pipeline and the same decision agent as `pipeline.py`.
+
+---
+
 ##  How It Works
 1. **UI Element Detection** → YOLO / OmniParser finds visual components.  
 2. **VLM Classification** → Qwen2-VL assigns semantic actions (click, type, toggle…).  
