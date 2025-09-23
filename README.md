@@ -123,6 +123,14 @@ It is designed to be:
 
 ---
 
+## Limitations & Future Work
+- Current element detection (OmniParser) has limited coverage on diverse UIs.
+- VLM struggles with fine-grained text-element alignment.
+- LLM reasoning requires fine-tuning for robustness.
+- Next step: explore reinforcement learning and better multimodal alignment.
+
+---
+
 ##  License
 MIT. See `LICENSE`.
 
