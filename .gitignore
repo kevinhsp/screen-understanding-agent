@@ -9,3 +9,4 @@ __pycache__/pipeline.cpython-310.pyc
 /pipeline_outputs
 pipeline_outputs/united_sample_element_actions.png
 pipeline_outputs/united_sample_screen_understanding_output.json
+/__pycache__

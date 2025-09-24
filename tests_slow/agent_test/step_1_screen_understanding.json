@@ -1,0 +1,503 @@
+{
+  "summary": "The website is an Expedia travel booking platform, specifically focused on flight bookings. Key modules include top navigation options like account, orders, cart, delivery location, search bar, and banners/categories. The main page allows users to select trip types (Roundtrip, One-way, Multi-city), enter departure and destination locations, choose dates, specify number of travelers, and initiate a search.",
+  "affordance": [],
+  "elements": [
+    {
+      "element_id": "element_24",
+      "primary_action": "none",
+      "description": "",
+      "secondary_actions": [],
+      "confidence": 0.7,
+      "bbox": {
+        "x": 361,
+        "y": 991,
+        "width": 1764,
+        "height": 529
+      },
+      "center": {
+        "x": 1243,
+        "y": 1255
+      }
+    },
+    {
+      "element_id": "element_5",
+      "primary_action": "click",
+      "description": "Click to explore package deals.",
+      "secondary_actions": [
+        "Get"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 323,
+        "y": 734,
+        "width": 595,
+        "height": 169
+      },
+      "center": {
+        "x": 620,
+        "y": 818
+      }
+    },
+    {
+      "element_id": "element_9",
+      "primary_action": "click",
+      "description": "Click to view the reward offer for members.",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 0.8,
+      "bbox": {
+        "x": 1538,
+        "y": 734,
+        "width": 594,
+        "height": 169
+      },
+      "center": {
+        "x": 1835,
+        "y": 818
+      }
+    },
+    {
+      "element_id": "element_0",
+      "primary_action": "click",
+      "description": "Click on the 'Get' button to proceed with booking.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1226,
+        "y": 734,
+        "width": 297,
+        "height": 167
+      },
+      "center": {
+        "x": 1374,
+        "y": 817
+      }
+    },
+    {
+      "element_id": "element_8",
+      "primary_action": "click",
+      "description": "Click on the 'Going' icon to proceed with entering the destination.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 794,
+        "y": 343,
+        "width": 438,
+        "height": 80
+      },
+      "center": {
+        "x": 1013,
+        "y": 383
+      }
+    },
+    {
+      "element_id": "element_7",
+      "primary_action": "click",
+      "description": "Click on the 'Leaving from' input field.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 358,
+        "y": 342,
+        "width": 437,
+        "height": 80
+      },
+      "center": {
+        "x": 576,
+        "y": 382
+      }
+    },
+    {
+      "element_id": "element_2",
+      "primary_action": "click",
+      "description": "Select cabin class for the traveler",
+      "secondary_actions": [
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1575,
+        "y": 343,
+        "width": 380,
+        "height": 80
+      },
+      "center": {
+        "x": 1765,
+        "y": 383
+      }
+    },
+    {
+      "element_id": "element_1",
+      "primary_action": "click",
+      "description": "Select a date range for your trip.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1236,
+        "y": 344,
+        "width": 334,
+        "height": 79
+      },
+      "center": {
+        "x": 1403,
+        "y": 383
+      }
+    },
+    {
+      "element_id": "element_23",
+      "primary_action": "click",
+      "description": "Click to list your property",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1526,
+        "y": 17,
+        "width": 219,
+        "height": 66
+      },
+      "center": {
+        "x": 1635,
+        "y": 50
+      }
+    },
+    {
+      "element_id": "element_11",
+      "primary_action": "click",
+      "description": "Click on the Expedia logo to navigate to the homepage.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 319,
+        "y": 19,
+        "width": 216,
+        "height": 66
+      },
+      "center": {
+        "x": 427,
+        "y": 52
+      }
+    },
+    {
+      "element_id": "element_10",
+      "primary_action": "click",
+      "description": "Click on 'Shop travel' to explore travel options.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 541,
+        "y": 19,
+        "width": 174,
+        "height": 65
+      },
+      "center": {
+        "x": 628,
+        "y": 51
+      }
+    },
+    {
+      "element_id": "element_19",
+      "primary_action": "click",
+      "description": "Select round-trip option for trip type",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 360,
+        "y": 243,
+        "width": 151,
+        "height": 70
+      },
+      "center": {
+        "x": 435,
+        "y": 278
+      }
+    },
+    {
+      "element_id": "element_3",
+      "primary_action": "click",
+      "description": "Click the Help icon for assistance.",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 2274,
+        "y": 1441,
+        "width": 152,
+        "height": 66
+      },
+      "center": {
+        "x": 2350,
+        "y": 1474
+      }
+    },
+    {
+      "element_id": "element_6",
+      "primary_action": "click",
+      "description": "Initiate a search for flights",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 1965,
+        "y": 345,
+        "width": 130,
+        "height": 75
+      },
+      "center": {
+        "x": 2030,
+        "y": 382
+      }
+    },
+    {
+      "element_id": "element_4",
+      "primary_action": "click",
+      "description": "Open app for more information",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1217,
+        "y": 25,
+        "width": 175,
+        "height": 54
+      },
+      "center": {
+        "x": 1304,
+        "y": 52
+      }
+    },
+    {
+      "element_id": "element_13",
+      "primary_action": "click",
+      "description": "Click to add a place to stay.",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 361,
+        "y": 442,
+        "width": 227,
+        "height": 37
+      },
+      "center": {
+        "x": 474,
+        "y": 460
+      }
+    },
+    {
+      "element_id": "element_18",
+      "primary_action": "click",
+      "description": "Click on the 'Support' icon.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1744,
+        "y": 18,
+        "width": 128,
+        "height": 64
+      },
+      "center": {
+        "x": 1808,
+        "y": 50
+      }
+    },
+    {
+      "element_id": "element_25",
+      "primary_action": "click",
+      "description": "Select Multi-city option for trip type",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 636,
+        "y": 249,
+        "width": 151,
+        "height": 54
+      },
+      "center": {
+        "x": 711,
+        "y": 276
+      }
+    },
+    {
+      "element_id": "element_22",
+      "primary_action": "click",
+      "description": "Click on the 'Flights' icon to view available flights.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 963,
+        "y": 143,
+        "width": 116,
+        "height": 67
+      },
+      "center": {
+        "x": 1021,
+        "y": 176
+      }
+    },
+    {
+      "element_id": "element_17",
+      "primary_action": "click",
+      "description": "Click to sign in to your account.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 2039,
+        "y": 21,
+        "width": 104,
+        "height": 56
+      },
+      "center": {
+        "x": 2091,
+        "y": 49
+      }
+    },
+    {
+      "element_id": "element_12",
+      "primary_action": "click",
+      "description": "Click on the icon to proceed.",
+      "secondary_actions": [
+        "stay"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 593,
+        "y": 441,
+        "width": 143,
+        "height": 39
+      },
+      "center": {
+        "x": 664,
+        "y": 460
+      }
+    },
+    {
+      "element_id": "element_20",
+      "primary_action": "click",
+      "description": "Click on the 'Trips' icon to view available trips.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1872,
+        "y": 20,
+        "width": 91,
+        "height": 60
+      },
+      "center": {
+        "x": 1917,
+        "y": 50
+      }
+    },
+    {
+      "element_id": "element_14",
+      "primary_action": "click",
+      "description": "Click to change currency to USD",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 1406,
+        "y": 24,
+        "width": 98,
+        "height": 55
+      },
+      "center": {
+        "x": 1455,
+        "y": 51
+      }
+    },
+    {
+      "element_id": "element_21",
+      "primary_action": "click",
+      "description": "Click to expand or collapse the chat icon.",
+      "secondary_actions": [
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1964,
+        "y": 19,
+        "width": 72,
+        "height": 58
+      },
+      "center": {
+        "x": 2000,
+        "y": 48
+      }
+    },
+    {
+      "element_id": "element_15",
+      "primary_action": "click",
+      "description": "Click on the icon to view available flights.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 767,
+        "y": 357,
+        "width": 55,
+        "height": 64
+      },
+      "center": {
+        "x": 794,
+        "y": 389
+      }
+    },
+    {
+      "element_id": "element_16",
+      "primary_action": "click",
+      "description": "Click on the location icon to set or change the delivery location.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 826,
+        "y": 360,
+        "width": 34,
+        "height": 47
+      },
+      "center": {
+        "x": 843,
+        "y": 383
+      }
+    }
+  ],
+  "processing_time_s": 62.23888945579529
+}

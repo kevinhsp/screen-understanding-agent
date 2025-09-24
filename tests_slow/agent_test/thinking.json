@@ -1,0 +1,54 @@
+{
+  "plan": "Book a round‑trip flight from Boston to Los Angeles on 10/5 with return on 10/8.",
+  "success_criteria": [
+    "Flight search results for Boston to Los Angeles on 10/5/2023 with return 10/8/2023 are displayed.",
+    "Booking page for the chosen flight loads successfully."
+  ],
+  "steps": [
+    {
+      "element_id": "element_19",
+      "actions": [
+        "click"
+      ],
+      "details": "Select the round‑trip option."
+    },
+    {
+      "element_id": "element_7",
+      "actions": [
+        "click",
+        "type"
+      ],
+      "details": "Enter \"Boston\" into the departure field."
+    },
+    {
+      "element_id": "element_8",
+      "actions": [
+        "click",
+        "type"
+      ],
+      "details": "Enter \"Los Angeles\" into the destination field."
+    },
+    {
+      "element_id": "element_1",
+      "actions": [
+        "click",
+        "type"
+      ],
+      "details": "Set the departure date to 10/5 and return date to 10/8."
+    },
+    {
+      "element_id": "element_6",
+      "actions": [
+        "click"
+      ],
+      "details": "Initiate the flight search."
+    },
+    {
+      "element_id": "element_0",
+      "actions": [
+        "click"
+      ],
+      "details": "Select the preferred flight from the results and proceed to booking."
+    }
+  ]
+}
