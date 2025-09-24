@@ -50,6 +50,34 @@ python pipeline.py
 
 ---
 
+##  Demo
+
+- Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
+- Session folder: `pipeline_outputs/sessions/session_20250924_151105`
+- Preview (Step 1 actions):
+
+![Demo Step 1 Actions](pipeline_outputs/sessions/session_20250924_151105/step_1/step_1_thinking_actions.png)
+
+- Thinking excerpt (`step_1_thinking.json`):
+
+```json
+{
+  "plan": "Set departure and destination, choose round-trip, enter travel dates, and search for flights.",
+  "steps": [
+    {"element_id": "element_6", "actions": ["click","type"], "details": "Enter departure location as Boston"},
+    {"element_id": "element_5", "actions": ["click","type"], "details": "Enter destination as Los Angeles"},
+    {"element_id": "element_11", "actions": ["click"], "details": "Select round-trip travel option"},
+    {"element_id": "element_0", "actions": ["click","type"], "details": "Open dates picker and enter departure date 2025/10/5"},
+    {"element_id": "element_0", "actions": ["type"], "details": "Enter return date 2025/10/8"},
+    {"element_id": "element_2", "actions": ["click"], "details": "Initiate flight search"}
+  ]
+}
+```
+
+- More outputs (JSON, images) are available in `pipeline_outputs/sessions/session_20250924_151105`.
+
+---
+
 ##  Outputs
 Saved under `pipeline_outputs/`:
 - `<image>_screen_understanding_output.json`  
@@ -89,18 +117,6 @@ Run a step-by-step session entirely in the terminal, without manual renaming eac
   - Override the decision model with `DECIDER_MODEL` (default: `openai/gpt-oss-20b`).
   - You can resume later by adding `3.png`, `4.png`, etc. into the same session folder and running the tool again.
   - Uses the same OCR → element detection → VLM pipeline and the same decision agent as `pipeline.py`.
-
----
-
-##  Demo
-
-- Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
-- Session folder: `pipeline_outputs/sessions/session_20250924_151105`
-- Preview (Step 1 actions):
-
-![Demo Step 1 Actions](pipeline_outputs/sessions/session_20250924_151105/step_1/step_1_thinking_actions.png)
-
-- More outputs (JSON, images) are available in `pipeline_outputs/sessions/session_20250924_151105`.
 
 ---
 
