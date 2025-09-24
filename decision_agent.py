@@ -136,12 +136,15 @@ class DecisionAgent:
         lines = []
         lines.append("You are an expert UI automation planner.")
         lines.append("Select EXACTLY ONE element and ONE action to progress the Task.")
-        lines.append("Rules:")
-        lines.append("- Prefer semantic match between Task and element description/secondary_actions.")
+        lines.append("Rules (be precise and conservative):")
+        lines.append("- Use ONLY elements listed below; do NOT invent element ids.")
+        lines.append("- Prefer strong semantic match between Task and element description/secondary_actions.")
         lines.append("- Prefer higher-confidence; tie-break by earlier order.")
         lines.append(f"- Allowed actions: {', '.join(ALLOWED_ACTIONS)}.")
-        lines.append("- If none apply, return action='none' and element_id=''.")
-        lines.append("- Do NOT invent element ids.")
+        lines.append("- If no element clearly advances the Task OR you are unsure, return action='none' and element_id=''.")
+        lines.append("- When returning 'none', begin thoughts with 'BLOCKED:' and give a concrete reason (<= 15 words).")
+        lines.append("- Keep thoughts decisive; avoid speculative words like 'maybe', 'perhaps', 'try', 'guess'.")
+        lines.append("- Never repeat any prior (element_id, action) pair from history.")
         # History-aware guidance
         if actions_history:
             lines.append("- Assume all previous actions were successfully executed; advance to the NEXT step.")
@@ -198,6 +201,7 @@ class DecisionAgent:
             lines.append(f"- id={eid} | action={pa} | conf={conf:.2f} | desc={desc} | secondary=[{sec}]")
         lines.append("")
         lines.append("Return ONLY one JSON object with keys exactly: thoughts, element_id, action, wrapped inside <decision>...</decision> tags.")
+        lines.append("If blocked/unsure, set element_id='' and action='none' and start thoughts with 'BLOCKED:'.")
         lines.append("Do not echo the above context.")
         return "\n".join(lines)
 
@@ -303,8 +307,27 @@ class DecisionAgent:
     # -------- Planning (pre-decision) ---------
     def _build_plan_prompt(self, task: str, ctx: Dict[str, Any], *, actions_history: Optional[List[Dict[str, Any]]] = None, prev_thinking: Optional[str] = None) -> str:
         lines: List[str] = []
-        schema = ("Return ONLY one JSON object with keys: "
-        "plan (string), steps (array of objects with element_id, actions [strings], details [string]), success_criteria (array of strings). Keep any extra natural-language instructions under 'details'. Do not include any other text.")
+        schema = (
+            "Return ONLY one JSON object with keys: "
+            "plan (string), steps (array of objects with element_id, actions [strings], details [string]), "
+            "success_criteria (array of strings). Keep any extra natural-language instructions under 'details'. Do not include any other text."
+        )
+
+        # Intro and rules
+        lines.append("You are an expert UI automation planner.")
+        lines.append("Produce the most reliable next 1–3 steps for the Task.")
+        lines.append("Rules (favor safety and certainty):")
+        lines.append("- Use ONLY elements listed below; do NOT invent element ids.")
+        lines.append("- Include a step ONLY if it clearly advances the Task.")
+        lines.append("- Avoid speculative language (e.g., 'maybe', 'try', 'guess'). Keep details concise.")
+        lines.append("- If nothing applicable or the screen blocks progress, set steps=[] and make plan start with 'BLOCKED: <reason>'.")
+        if actions_history:
+            lines.append("- Assume previous steps succeeded; DO NOT repeat any prior (element_id, action).")
+        lines.append("")
+        lines.append(f"Task: {task}")
+        lines.append("")
+
+        # History context
         if actions_history:
             lines.append("Actions Taken So Far (all steps):")
             for i, a in enumerate(actions_history, 1):
@@ -319,6 +342,8 @@ class DecisionAgent:
             lines.append("Previous Plan (last step):")
             lines.append(str(prev_thinking).strip())
             lines.append("")
+
+        # Current UI summary and affordances
         lines.append("Current UI Summary:")
         lines.append(str(ctx.get('summary','')).strip())
         lines.append("")
@@ -328,6 +353,8 @@ class DecisionAgent:
             for a in aff[:50]:
                 lines.append(f"- {a}")
             lines.append("")
+
+        # Available elements
         elems = ctx.get('elements') or []
         if elems:
             lines.append("Available Elements (use these ids in steps.element_id):")
@@ -340,17 +367,11 @@ class DecisionAgent:
                 acts_str = ",".join(sorted(set(acts))) if acts else "click,type,select,open,navigate,toggle,none"
                 lines.append(f"- id={eid} | actions=[{acts_str}] | desc={desc}")
             lines.append("")
-            prompt =("You are an expert UI automation planner. Goal: produce a concise, step-by-step plan for the Task.\n\n"
-                f"Update the plan using the current UI. Keep it practical and specific."
-                f"Task: {task}"
-                f"Output schema: {schema}\n\n Screen Summary: {ctx.get('summary','')}\n\n"
-                f"Elements: {lines}\n\n")
-        # lines.append("Output schema: ")
-        # lines.append(schema)
-        # lines.append("Example (replace with current screen content):")
-        # lines.append("<thinking>{\\n  \\\"plan\\\": \\\"Set departure, destination, dates, then search.\\\",\\n  \\\"steps\\\": [\\n    {\\n      \\\"element_id\\\": \\\"element_19\\\",\\n      \\\"actions\\\": [\\\"click\\\"],\\n      \\\"details\\\": \\\"Select round-trip option.\\\"\\n    },\\n    {\\n      \\\"element_id\\\": \\\"element_7\\\",\\n      \\\"actions\\\": [\\\"click\\\", \\\"type\\\"],\\n      \\\"details\\\": \\\"Click leaving-from and type 'Boston'.\\\"\\n    },\\n    {\\n      \\\"element_id\\\": \\\"element_8\\\",\\n      \\\"actions\\\": [\\\"click\\\", \\\"type\\\"],\\n      \\\"details\\\": \\\"Click going-to and type 'Los Angeles'.\\\"\\n    },\\n    {\\n      \\\"element_id\\\": \\\"element_1\\\",\\n      \\\"actions\\\": [\\\"click\\\", \\\"type\\\"],\\n      \\\"details\\\": \\\"Set date range to 10/5-10/8.\\\"\\n    },\\n    {\\n      \\\"element_id\\\": \\\"element_6\\\",\\n      \\\"actions\\\": [\\\"click\\\"],\\n      \\\"details\\\": \\\"Click Search.\\\"\\n    }\\n  ],\\n  \\\"success_criteria\\\": [\\n    \\\"Origin set to BOS\\\",\\n    \\\"Destination set to LAX\\\",\\n    \\\"Dates set to 10/5-10/8\\\"\\n  ]\\n}</thinking>")
-        # lines.append("Wrap the single JSON object inside <thinking> and </thinking> tags. Do not include any extra text before or after the tags.")
-        return prompt
+
+        # Output contract
+        lines.append(f"Output schema: {schema}")
+        lines.append("Return ONLY the JSON object; do not echo the context.")
+        return "\n".join(lines)
 
     def _extract_thinking(self, text: str) -> str:
         import re
