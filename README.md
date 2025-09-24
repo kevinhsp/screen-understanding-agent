@@ -15,7 +15,7 @@ This project is a **prototype Digital World Agent**. It takes a **raw UI screens
 
 ---
 
-##  One page task Demo
+##  Same page task Demo
 
 - Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
 - Session folder: `pipeline_outputs/sessions/session_20250924_151105`
