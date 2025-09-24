@@ -15,6 +15,33 @@ This project is a **prototype Digital World Agent**. It takes a **raw UI screens
 
 ---
 
+##  Demo
+
+- Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
+- Session folder: `pipeline_outputs/sessions/session_20250924_151105`
+- Preview (Step 1 actions):
+
+![Demo Step 1 Actions](pipeline_outputs/sessions/session_20250924_151105/step_1/step_1_thinking_actions.png)
+
+- Thinking excerpt (`step_1_thinking.json`):
+
+```json
+{
+  "plan": "Set departure and destination, choose round-trip, enter travel dates, and search for flights.",
+  "steps": [
+    {"element_id": "element_6", "actions": ["click","type"], "details": "Enter departure location as Boston"},
+    {"element_id": "element_5", "actions": ["click","type"], "details": "Enter destination as Los Angeles"},
+    {"element_id": "element_11", "actions": ["click"], "details": "Select round-trip travel option"},
+    {"element_id": "element_0", "actions": ["click","type"], "details": "Open dates picker and enter departure date 2025/10/5"},
+    {"element_id": "element_0", "actions": ["type"], "details": "Enter return date 2025/10/8"},
+    {"element_id": "element_2", "actions": ["click"], "details": "Initiate flight search"}
+  ]
+}
+```
+
+- More outputs (JSON, images) are available in `pipeline_outputs/sessions/session_20250924_151105`.
+
+---
 ##  Installation
 **Prereqs**: Python ≥3.9, Conda. GPU strongly recommended.  
 
@@ -50,33 +77,6 @@ python pipeline.py
 
 ---
 
-##  Demo
-
-- Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
-- Session folder: `pipeline_outputs/sessions/session_20250924_151105`
-- Preview (Step 1 actions):
-
-![Demo Step 1 Actions](pipeline_outputs/sessions/session_20250924_151105/step_1/step_1_thinking_actions.png)
-
-- Thinking excerpt (`step_1_thinking.json`):
-
-```json
-{
-  "plan": "Set departure and destination, choose round-trip, enter travel dates, and search for flights.",
-  "steps": [
-    {"element_id": "element_6", "actions": ["click","type"], "details": "Enter departure location as Boston"},
-    {"element_id": "element_5", "actions": ["click","type"], "details": "Enter destination as Los Angeles"},
-    {"element_id": "element_11", "actions": ["click"], "details": "Select round-trip travel option"},
-    {"element_id": "element_0", "actions": ["click","type"], "details": "Open dates picker and enter departure date 2025/10/5"},
-    {"element_id": "element_0", "actions": ["type"], "details": "Enter return date 2025/10/8"},
-    {"element_id": "element_2", "actions": ["click"], "details": "Initiate flight search"}
-  ]
-}
-```
-
-- More outputs (JSON, images) are available in `pipeline_outputs/sessions/session_20250924_151105`.
-
----
 
 ##  Outputs
 Saved under `pipeline_outputs/`:
