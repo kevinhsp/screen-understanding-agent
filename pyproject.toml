@@ -30,6 +30,7 @@ datasets = "^2.16.0"
 einops = "^0.7.0"
 timm = "^0.9.12"
 nest-asyncio = "^1.5.8"
+ultralytics = "^8.1.0"
 
 
 [tool.poetry.group.dev.dependencies]

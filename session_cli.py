@@ -474,14 +474,6 @@ def main() -> int:
         print(f"Thinking: {think_path}")
         if (step_prefix / f"step_{step}_thinking_actions.png").exists():
             print(f"Thinking Actions: {actions_img_path}")
-        if thinking_only:
-            print("Candidates: [skipped in thinking-only mode]")
-            print("Decision: [skipped in thinking-only mode]")
-        else:
-            print(f"Candidates: {cand_path}")
-            print(f"Decision: {dec_path}")
-            if isinstance(decision_obj, dict) and decision_obj.get("action"):
-                print(f"Suggested action: {decision_obj.get('action')} on {decision_obj.get('element_id')}")
         print("=================\n")
 
         step += 1

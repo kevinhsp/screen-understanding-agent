@@ -422,8 +422,6 @@ class DecisionAgent:
         except Exception:
             parsed = {}
         import copy
-        print("\nParsed result:")
-        print(parsed)
 
         plan = str(parsed.get('plan','')).strip()
         results["plan"] = plan
@@ -464,8 +462,6 @@ class DecisionAgent:
                 num_beams=1,
             )
         text_out = self.tokenizer.batch_decode(out_ids, skip_special_tokens=True)[0]
-        print("\n Test text print:\n"+ text_out)
-        # thinking_inner = self._extract_thinking(text)
         results = self._normalize_thinking_json(text_out)
         return results
 

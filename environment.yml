@@ -44,6 +44,9 @@ dependencies:
     - tokenizers>=0.15.0
     - sentencepiece>=0.1.99
     
+    # Detection (YOLO / OmniParser)
+    - ultralytics>=8.1.0
+    
     # PaddleOCR (requires separate installation)
     - paddlepaddle>=2.5.0
     - paddleocr>=2.7.0
