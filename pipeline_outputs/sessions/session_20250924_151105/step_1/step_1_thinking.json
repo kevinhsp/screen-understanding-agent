@@ -1,0 +1,53 @@
+{
+  "plan": "Set departure and destination, choose round-trip, enter travel dates, and search for flights.",
+  "success_criteria": [
+    "Flight search results page loads with available flights from Boston to Los Angeles on 2025/10/5 and return on 2025/10/8"
+  ], 
+  "steps": [
+    {
+      "element_id": "element_6",
+      "actions": [
+        "click",
+        "type"
+      ],
+      "details": "Enter departure location as Boston"
+    },
+    {
+      "element_id": "element_5",
+      "actions": [
+        "click",
+        "type"
+      ],
+      "details": "Enter destination as Los Angeles"
+    },
+    {
+      "element_id": "element_11",
+      "actions": [
+        "click"
+      ],
+      "details": "Select round-trip travel option"
+    },
+    {
+      "element_id": "element_0",
+      "actions": [
+        "click",
+        "type"
+      ],
+      "details": "Open dates picker and enter departure date 2025/10/5"
+    },
+    {
+      "element_id": "element_0",
+      "actions": [
+        "type"
+      ],
+      "details": "Enter return date 2025/10/8"
+    },
+    {
+      "element_id": "element_2",
+      "actions": [
+        "click"
+      ],
+      "details": "Initiate flight search"
+    }
+  ]
+}

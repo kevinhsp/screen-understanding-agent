@@ -1,0 +1,657 @@
+{
+  "summary": "The website is an Expedia page for searching flights. Key modules include top navigation with options like account, orders, cart, delivery location, search bar, and banners/categories. The main section allows users to select departure and destination locations, dates, number of travelers, and cabin class.",
+  "affordance": [],
+  "elements": [
+    {
+      "element_id": "element_30",
+      "primary_action": "click",
+      "description": "Click on the 'Looking for cheap flights?' link.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 250,
+        "y": 850,
+        "width": 1137,
+        "height": 377
+      },
+      "center": {
+        "x": 818,
+        "y": 1038
+      }
+    },
+    {
+      "element_id": "element_4",
+      "primary_action": "click",
+      "description": "Click on the 'Discover' icon to explore local attractions.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1450,
+        "y": 845,
+        "width": 537,
+        "height": 236
+      },
+      "center": {
+        "x": 1718,
+        "y": 963
+      }
+    },
+    {
+      "element_id": "element_7",
+      "primary_action": "click",
+      "description": "Click on the 'Visit Morro Bay' link.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1451,
+        "y": 1092,
+        "width": 538,
+        "height": 235
+      },
+      "center": {
+        "x": 1720,
+        "y": 1209
+      }
+    },
+    {
+      "element_id": "element_5",
+      "primary_action": "click",
+      "description": "Click on the 'Going to' field to enter your destination.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 668,
+        "y": 335,
+        "width": 456,
+        "height": 82
+      },
+      "center": {
+        "x": 896,
+        "y": 376
+      }
+    },
+    {
+      "element_id": "element_6",
+      "primary_action": "click",
+      "description": "Click on the departure location input field.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 214,
+        "y": 335,
+        "width": 450,
+        "height": 82
+      },
+      "center": {
+        "x": 439,
+        "y": 376
+      }
+    },
+    {
+      "element_id": "element_3",
+      "primary_action": "click",
+      "description": "Select traveler type and cabin class",
+      "secondary_actions": [
+        "click on '1 traveler'"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1488,
+        "y": 335,
+        "width": 397,
+        "height": 84
+      },
+      "center": {
+        "x": 1686,
+        "y": 377
+      }
+    },
+    {
+      "element_id": "element_0",
+      "primary_action": "click",
+      "description": "Click on the 'Dates' button to modify travel dates.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1133,
+        "y": 335,
+        "width": 348,
+        "height": 83
+      },
+      "center": {
+        "x": 1307,
+        "y": 376
+      }
+    },
+    {
+      "element_id": "element_25",
+      "primary_action": "click",
+      "description": "Click on the Spirit logo to view Spirit Airlines flights.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1016,
+        "y": 604,
+        "width": 204,
+        "height": 88
+      },
+      "center": {
+        "x": 1118,
+        "y": 648
+      }
+    },
+    {
+      "element_id": "element_17",
+      "primary_action": "click",
+      "description": "Click on the JetBlue logo to view available flights.",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1222,
+        "y": 605,
+        "width": 200,
+        "height": 89
+      },
+      "center": {
+        "x": 1322,
+        "y": 649
+      }
+    },
+    {
+      "element_id": "element_9",
+      "primary_action": "click",
+      "description": "Click on the 'Save' icon to save your flight search.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1418,
+        "y": 610,
+        "width": 209,
+        "height": 80
+      },
+      "center": {
+        "x": 1522,
+        "y": 650
+      }
+    },
+    {
+      "element_id": "element_12",
+      "primary_action": "click",
+      "description": "Click on the 'when' icon to view flight availability.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1631,
+        "y": 613,
+        "width": 188,
+        "height": 75
+      },
+      "center": {
+        "x": 1725,
+        "y": 650
+      }
+    },
+    {
+      "element_id": "element_26",
+      "primary_action": "click",
+      "description": "Click on the Delta logo to view more details or book a flight.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 825,
+        "y": 615,
+        "width": 189,
+        "height": 71
+      },
+      "center": {
+        "x": 919,
+        "y": 650
+      }
+    },
+    {
+      "element_id": "element_27",
+      "primary_action": "click",
+      "description": "Click on the 'will' icon.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 605,
+        "y": 619,
+        "width": 210,
+        "height": 63
+      },
+      "center": {
+        "x": 710,
+        "y": 650
+      }
+    },
+    {
+      "element_id": "element_10",
+      "primary_action": "click",
+      "description": "Click on the Expedia logo to navigate to the homepage.",
+      "secondary_actions": [],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 212,
+        "y": 22,
+        "width": 206,
+        "height": 59
+      },
+      "center": {
+        "x": 315,
+        "y": 51
+      }
+    },
+    {
+      "element_id": "element_23",
+      "primary_action": "click",
+      "description": "Click on 'List' icon to list your property",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1421,
+        "y": 23,
+        "width": 215,
+        "height": 54
+      },
+      "center": {
+        "x": 1528,
+        "y": 50
+      }
+    },
+    {
+      "element_id": "element_16",
+      "primary_action": "click",
+      "description": "Click to add a flight to your cart.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 220,
+        "y": 619,
+        "width": 177,
+        "height": 63
+      },
+      "center": {
+        "x": 308,
+        "y": 650
+      }
+    },
+    {
+      "element_id": "element_24",
+      "primary_action": "click",
+      "description": "Click on the Hawaiian Airlines logo to view their flight options.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1838,
+        "y": 617,
+        "width": 164,
+        "height": 66
+      },
+      "center": {
+        "x": 1920,
+        "y": 650
+      }
+    },
+    {
+      "element_id": "element_8",
+      "primary_action": "click",
+      "description": "Click on the United logo to view available flights.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 425,
+        "y": 619,
+        "width": 171,
+        "height": 60
+      },
+      "center": {
+        "x": 510,
+        "y": 649
+      }
+    },
+    {
+      "element_id": "element_11",
+      "primary_action": "click",
+      "description": "Select round-trip travel option",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 217,
+        "y": 240,
+        "width": 149,
+        "height": 68
+      },
+      "center": {
+        "x": 291,
+        "y": 274
+      }
+    },
+    {
+      "element_id": "element_2",
+      "primary_action": "click",
+      "description": "Click the 'Search' button to initiate a flight search.",
+      "secondary_actions": [
+        "type",
+        "toggle"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 1893,
+        "y": 338,
+        "width": 130,
+        "height": 77
+      },
+      "center": {
+        "x": 1958,
+        "y": 376
+      }
+    },
+    {
+      "element_id": "element_1",
+      "primary_action": "click",
+      "description": "Open app to proceed further",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1110,
+        "y": 23,
+        "width": 174,
+        "height": 57
+      },
+      "center": {
+        "x": 1197,
+        "y": 51
+      }
+    },
+    {
+      "element_id": "element_21",
+      "primary_action": "click",
+      "description": "Click on the 'Support' icon.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1638,
+        "y": 21,
+        "width": 127,
+        "height": 59
+      },
+      "center": {
+        "x": 1701,
+        "y": 50
+      }
+    },
+    {
+      "element_id": "element_22",
+      "primary_action": "click",
+      "description": "Click on 'One-way' to select one-way travel option.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 364,
+        "y": 244,
+        "width": 141,
+        "height": 53
+      },
+      "center": {
+        "x": 434,
+        "y": 270
+      }
+    },
+    {
+      "element_id": "element_32",
+      "primary_action": "click",
+      "description": "Click on the 'Multi-city' icon.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 499,
+        "y": 245,
+        "width": 141,
+        "height": 49
+      },
+      "center": {
+        "x": 569,
+        "y": 269
+      }
+    },
+    {
+      "element_id": "element_19",
+      "primary_action": "click",
+      "description": "Click on the 'Sign in' button to sign into your account.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1932,
+        "y": 21,
+        "width": 107,
+        "height": 61
+      },
+      "center": {
+        "x": 1985,
+        "y": 51
+      }
+    },
+    {
+      "element_id": "element_29",
+      "primary_action": "click",
+      "description": "Click on the 'Shop travel' icon to explore travel options.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 444,
+        "y": 31,
+        "width": 158,
+        "height": 41
+      },
+      "center": {
+        "x": 523,
+        "y": 51
+      }
+    },
+    {
+      "element_id": "element_13",
+      "primary_action": "click",
+      "description": "Click on the USD icon to change currency settings.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1288,
+        "y": 26,
+        "width": 125,
+        "height": 49
+      },
+      "center": {
+        "x": 1350,
+        "y": 50
+      }
+    },
+    {
+      "element_id": "element_15",
+      "primary_action": "click",
+      "description": "Click on the 'Add a car' checkbox.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 451,
+        "y": 435,
+        "width": 143,
+        "height": 39
+      },
+      "center": {
+        "x": 522,
+        "y": 454
+      }
+    },
+    {
+      "element_id": "element_20",
+      "primary_action": "click",
+      "description": "Click on the 'Trips' icon to view available travel packages.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1765,
+        "y": 20,
+        "width": 91,
+        "height": 61
+      },
+      "center": {
+        "x": 1810,
+        "y": 50
+      }
+    },
+    {
+      "element_id": "element_18",
+      "primary_action": "click",
+      "description": "Click on the message icon to open chat support.",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 1857,
+        "y": 20,
+        "width": 72,
+        "height": 62
+      },
+      "center": {
+        "x": 1893,
+        "y": 51
+      }
+    },
+    {
+      "element_id": "element_14",
+      "primary_action": "click",
+      "description": "Click on the arrow icon to proceed.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 644,
+        "y": 352,
+        "width": 50,
+        "height": 53
+      },
+      "center": {
+        "x": 669,
+        "y": 378
+      }
+    },
+    {
+      "element_id": "element_31",
+      "primary_action": "click",
+      "description": "Click on the 'as' icon to proceed.",
+      "secondary_actions": [
+        "Save"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1449,
+        "y": 732,
+        "width": 40,
+        "height": 48
+      },
+      "center": {
+        "x": 1469,
+        "y": 756
+      }
+    },
+    {
+      "element_id": "element_28",
+      "primary_action": "click",
+      "description": "Click on the copyright icon.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 701,
+        "y": 355,
+        "width": 33,
+        "height": 46
+      },
+      "center": {
+        "x": 717,
+        "y": 378
+      }
+    },
+    {
+      "element_id": "element_33",
+      "primary_action": "click",
+      "description": "Click on the play icon to start a search.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1929,
+        "y": 846,
+        "width": 36,
+        "height": 32
+      },
+      "center": {
+        "x": 1947,
+        "y": 862
+      }
+    }
+  ],
+  "processing_time_s": 77.32031965255737
+}
