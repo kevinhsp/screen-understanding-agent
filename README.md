@@ -92,6 +92,18 @@ Run a step-by-step session entirely in the terminal, without manual renaming eac
 
 ---
 
+##  Demo
+
+- Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
+- Session folder: `pipeline_outputs/sessions/session_20250924_151105`
+- Preview (Step 1 actions):
+
+![Demo Step 1 Actions](pipeline_outputs/sessions/session_20250924_151105/step_1/step_1_thinking_actions.png)
+
+- More outputs (JSON, images) are available in `pipeline_outputs/sessions/session_20250924_151105`.
+
+---
+
 ##  How It Works
 1. **UI Element Detection** → YOLO / OmniParser finds visual components.  
 2. **VLM Classification** → Qwen2-VL assigns semantic actions (click, type, toggle…).  
