@@ -15,7 +15,7 @@ This project is a **prototype Digital World Agent**. It takes a **raw UI screens
 
 ---
 
-##  Demo
+##  One page task Demo
 
 - Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
 - Session folder: `pipeline_outputs/sessions/session_20250924_151105`
@@ -57,21 +57,35 @@ weights/icon_detect/model.pt
 
 ---
 
-##  Quickstart (One-liners)
+##  Quickstart (Sessions)
 
-**Linux/macOS (bash):**
+- All platforms:
+  - `python session_cli.py`
+  - 按提示输入任务文本；工具会创建 `pipeline_outputs/sessions/session_YYYYMMDD_HHMMSS/`。
+  - 将截图依次放入该会话目录为 `1.png`, `2.png`, ...，按提示回车推进。
+
+- Optional env vars:
+  - `DECIDER_MODEL`：决策模型（默认 `openai/gpt-oss-20b`）。
+  - `THINKING_ONLY`：仅生成 plan/思考产物（默认 `1`）。设为 `0` 以同时生成候选与最终决策。
+
+- Linux/macOS (bash):
 ```bash
-export IMAGE_PATH=examples/united_sample.png
-export DW="Select LAX as departure city"   # optional task
-export DECIDER_MODEL=openai/gpt-oss-20b    # optional, default is this
-python pipeline.py
+export DECIDER_MODEL=openai/gpt-oss-20b
+export THINKING_ONLY=0   # 需要候选与最终决策时开启
+python session_cli.py
 ```
 
-**Windows PowerShell:**
+- Windows PowerShell:
 ```powershell
-$env:IMAGE_PATH = "examples/united_sample.png"
-$env:DW = "Select LAX as departure city"
 $env:DECIDER_MODEL = "openai/gpt-oss-20b"
+$env:THINKING_ONLY = "0"   # 需要候选与最终决策时开启
+python session_cli.py
+```
+
+- Alternative: One-off image
+  - 若仅想对单张图片跑一次完整管线：
+```bash
+export IMAGE_PATH=examples/united_sample.png
 python pipeline.py
 ```
 
@@ -79,17 +93,35 @@ python pipeline.py
 
 
 ##  Outputs
-Saved under `pipeline_outputs/`:
-- `<image>_screen_understanding_output.json`  
-- `<image>_element_actions.png`  
-- `<image>_decision.json` (if `DW`/`DW_TASK` is set)  
+Primary (session) outputs are saved under `pipeline_outputs/sessions/session_YYYYMMDD_HHMMSS/step_N/`:
+- `step_N_input.png`
+- `step_N_screen_understanding.json`
+- `step_N_element_actions.png` (若可用)
+- `step_N_thinking.json`
+- `step_N_thinking_actions.png`
+- `step_N_candidates.json`（当 `THINKING_ONLY=0` 时）
+- `step_N_decision.json`（当 `THINKING_ONLY=0` 时）
 
-**Example decision trace:**
+Session 根目录还会生成：
+- `task.txt`
+- `actions_history.json`
+- `thinking_latest.txt`
+
+Alternative (one-off image via `pipeline.py`) 会在 `pipeline_outputs/` 下生成：
+- `<image>_screen_understanding_output.json`
+- `<image>_element_actions.png`
+- `<image>_decision.json`（当设置了 `DW`/`DW_TASK` 时）
+
+Example `step_N_decision.json`:
 ```json
 {
   "task": "Select LAX as departure city",
-  "thinking": "The task is to select LAX. The detected dropdown shows airports. The element labeled 'From: LAX' is the best match.",
-  "action": {"id": 12, "role": "dropdown", "text": "LAX"}
+  "decision": {
+    "thoughts": "Prefer the From field labeled LAX.",
+    "element_id": "element_12",
+    "action": "click",
+    "model": "openai/gpt-oss-20b"
+  }
 }
 ```
 
