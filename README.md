@@ -4,20 +4,24 @@ This project is a prototype Digital World Agent. It takes a raw UI screenshot an
 
 ---
 
-## Features
-- Screen parsing: detect UI elements (YOLO/OmniParser) + OCR
-- Action semantics: VLM (default: Qwen2-VL) infers likely actions and summarizes the page
-- Decision agent: an LLM (default: GPT-OSS-20B) selects one best element+action for a task with a transparent thinking trace
-- Outputs:
-  - Annotated screenshot (`element_actions.png`)
-  - Structured JSON with elements + actions (`_output.json`)
-  - Decision reasoning trace (`_decision.json`)
-Custom prompting & algorithmic heuristics: Specially designed task-specific prompts and logic rules significantly improve reliability, beyond naïve model calls.
----
+ 
 
 ## General Thought about Digital World Understanding
 
 To enable a system to “understand the digital world like humans,” it must jointly model the local (what each element looks like, its attributes, and affordances) and the global/relational aspects (semantic, spatial, and functional relationships among elements and their relevance to the task goal), and integrate them into a unified representation for reasoning, planning, and acting—simply recognizing individual elements is not enough. This project is a start of a possible experimental implementation. 
+
+## Features
+
+- UI parsing: YOLO/OmniParser element detection + hybrid OCR (Tesseract/EasyOCR/TrOCR/PaddleOCR).
+- VLM analysis: page summary and high‑confidence affordances/actions for downstream use.
+- Planning agent: history‑aware, updates prior plan, assumes earlier steps done; outputs plan/steps/success_criteria; renders thinking_actions overlay.
+- Decision agent: selects next element+action with safety rules; avoids repeats via actions_history; robust fallbacks when uncertain.
+- Session runner: interactive multi‑step flow, thinking‑only mode, per‑step artifacts, auto‑append previous step’s planned steps to actions_history, resume script to index steps.
+- Persistent IDs: track elements across screenshots via grid/text/dhash/IoU for stability.
+- Configurable models: switch weights/IDs via env; GPU/CPU friendly; tunable thresholds.
+- Rich outputs: JSON and annotated images for understanding, actions, thinking, and decisions.
+
+---
 
 ## Same Page Demo
 
