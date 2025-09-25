@@ -1,0 +1,477 @@
+{
+  "summary": "The page is from the Virginia Department of Motor Vehicles, providing information on planning a visit to the DMV. Key modules include a top navigation bar with options like account, orders, cart, delivery location, search bar, and banners/categories. The main content area promotes finding an appointment time.",
+  "affordance": [
+    "click on 'Find an Appointment Time'",
+    "scroll down to read more about appointments",
+    "click on 'How Appointments Work' section",
+    "click on 'How E-Ticket Works' section"
+  ],
+  "elements": [
+    {
+      "element_id": "element_5",
+      "primary_action": "click",
+      "description": "Click to find an appointment time.",
+      "secondary_actions": [
+        "scroll down to read more about appointments"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 257,
+        "y": 384,
+        "width": 1674,
+        "height": 406
+      },
+      "center": {
+        "x": 1094,
+        "y": 587
+      }
+    },
+    {
+      "element_id": "element_18",
+      "primary_action": "click",
+      "description": "Click on the 'E-Ticket' icon to learn more.",
+      "secondary_actions": [
+        "click on 'How E-Ticket Works' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 510,
+        "y": 1322,
+        "width": 1217,
+        "height": 91
+      },
+      "center": {
+        "x": 1118,
+        "y": 1367
+      }
+    },
+    {
+      "element_id": "element_7",
+      "primary_action": "click",
+      "description": "Click on the Virginia Department of Motor Vehicles logo",
+      "secondary_actions": [
+        "click on 'Find an Appointment Time'",
+        "click on 'How Appointments Work' section",
+        "click on 'How E-Ticket Works' section"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 215,
+        "y": 87,
+        "width": 303,
+        "height": 117
+      },
+      "center": {
+        "x": 366,
+        "y": 145
+      }
+    },
+    {
+      "element_id": "element_6",
+      "primary_action": "click",
+      "description": "Click on the 'DMV' icon to proceed.",
+      "secondary_actions": [
+        "click on 'Find an Appointment Time'",
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1849,
+        "y": 0,
+        "width": 391,
+        "height": 89
+      },
+      "center": {
+        "x": 2044,
+        "y": 44
+      }
+    },
+    {
+      "element_id": "element_15",
+      "primary_action": "click",
+      "description": "Click on the '©' icon to access online services.",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 719,
+        "y": 87,
+        "width": 244,
+        "height": 120
+      },
+      "center": {
+        "x": 841,
+        "y": 147
+      }
+    },
+    {
+      "element_id": "element_0",
+      "primary_action": "click",
+      "description": "Click to find an appointment time.",
+      "secondary_actions": [
+        "scroll down to read more about appointments"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 939,
+        "y": 541,
+        "width": 367,
+        "height": 74
+      },
+      "center": {
+        "x": 1122,
+        "y": 578
+      }
+    },
+    {
+      "element_id": "element_12",
+      "primary_action": "click",
+      "description": "Reserve your spot for an appointment",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1772,
+        "y": 205,
+        "width": 290,
+        "height": 87
+      },
+      "center": {
+        "x": 1917,
+        "y": 248
+      }
+    },
+    {
+      "element_id": "element_17",
+      "primary_action": "click",
+      "description": "Click on the 'Search MY ACCOUNT' icon.",
+      "secondary_actions": [
+        "click on 'Find an Appointment Time'",
+        "scroll down to read more about appointments",
+        "click on 'How Appointments Work' section",
+        "click on 'How E-Ticket Works' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1470,
+        "y": 87,
+        "width": 200,
+        "height": 119
+      },
+      "center": {
+        "x": 1570,
+        "y": 146
+      }
+    },
+    {
+      "element_id": "element_11",
+      "primary_action": "click",
+      "description": "Click on the 'Locations' icon to view DMV locations.",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 967,
+        "y": 86,
+        "width": 190,
+        "height": 123
+      },
+      "center": {
+        "x": 1062,
+        "y": 147
+      }
+    },
+    {
+      "element_id": "element_1",
+      "primary_action": "click",
+      "description": "Click on the 'VIRGINIA' link to navigate to the homepage.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 219,
+        "y": 204,
+        "width": 257,
+        "height": 88
+      },
+      "center": {
+        "x": 347,
+        "y": 248
+      }
+    },
+    {
+      "element_id": "element_2",
+      "primary_action": "click",
+      "description": "Click on the search icon to initiate a search for DMV services.",
+      "secondary_actions": [
+        "click on 'Reserve Your Spot'"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1692,
+        "y": 114,
+        "width": 338,
+        "height": 65
+      },
+      "center": {
+        "x": 1861,
+        "y": 146
+      }
+    },
+    {
+      "element_id": "element_16",
+      "primary_action": "click",
+      "description": "Click on the 'MOVING' icon to explore moving-related services.",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1154,
+        "y": 86,
+        "width": 166,
+        "height": 123
+      },
+      "center": {
+        "x": 1237,
+        "y": 147
+      }
+    },
+    {
+      "element_id": "element_4",
+      "primary_action": "click",
+      "description": "Click on the '©' icon to access the footer menu.",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 663,
+        "y": 205,
+        "width": 220,
+        "height": 87
+      },
+      "center": {
+        "x": 773,
+        "y": 248
+      }
+    },
+    {
+      "element_id": "element_19",
+      "primary_action": "click",
+      "description": "Click on the '& Forms' icon to access forms.",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.8,
+      "bbox": {
+        "x": 1316,
+        "y": 86,
+        "width": 152,
+        "height": 122
+      },
+      "center": {
+        "x": 1392,
+        "y": 147
+      }
+    },
+    {
+      "element_id": "element_3",
+      "primary_action": "click",
+      "description": "Click on the 'VEHICLES' button.",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 477,
+        "y": 205,
+        "width": 189,
+        "height": 87
+      },
+      "center": {
+        "x": 571,
+        "y": 248
+      }
+    },
+    {
+      "element_id": "element_8",
+      "primary_action": "click",
+      "description": "Click on the 'RECORDS' button to access record-related information.",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 880,
+        "y": 205,
+        "width": 185,
+        "height": 87
+      },
+      "center": {
+        "x": 972,
+        "y": 248
+      }
+    },
+    {
+      "element_id": "element_14",
+      "primary_action": "click",
+      "description": "Click on the 'SAFETY' button to access safety-related information.",
+      "secondary_actions": [
+        "click on 'LOCATIONS'"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1063,
+        "y": 204,
+        "width": 167,
+        "height": 88
+      },
+      "center": {
+        "x": 1146,
+        "y": 248
+      }
+    },
+    {
+      "element_id": "element_23",
+      "primary_action": "click",
+      "description": "Click on the icon to access forms.",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1318,
+        "y": 108,
+        "width": 144,
+        "height": 78
+      },
+      "center": {
+        "x": 1390,
+        "y": 147
+      }
+    },
+    {
+      "element_id": "element_10",
+      "primary_action": "click",
+      "description": "Click on 'Find an Appointment Time'",
+      "secondary_actions": [
+        "scroll down to read more about appointments"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 556,
+        "y": 1106,
+        "width": 177,
+        "height": 36
+      },
+      "center": {
+        "x": 644,
+        "y": 1124
+      }
+    },
+    {
+      "element_id": "element_21",
+      "primary_action": "click",
+      "description": "Click on the icon with the text '©'",
+      "secondary_actions": [
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 567,
+        "y": 49,
+        "width": 199,
+        "height": 28
+      },
+      "center": {
+        "x": 666,
+        "y": 63
+      }
+    },
+    {
+      "element_id": "element_9",
+      "primary_action": "click",
+      "description": "Click on 'Walk-ins:' to view walk-in appointment options.",
+      "secondary_actions": [
+        "click on 'Find an Appointment Time'",
+        "scroll down to read more about appointments"
+      ],
+      "confidence": 0.8,
+      "bbox": {
+        "x": 557,
+        "y": 1211,
+        "width": 108,
+        "height": 35
+      },
+      "center": {
+        "x": 611,
+        "y": 1228
+      }
+    },
+    {
+      "element_id": "element_13",
+      "primary_action": "click",
+      "description": "Click on the 'E-Ticket' link",
+      "secondary_actions": [
+        "click on 'How E-Ticket Works' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 557,
+        "y": 1159,
+        "width": 104,
+        "height": 35
+      },
+      "center": {
+        "x": 609,
+        "y": 1176
+      }
+    },
+    {
+      "element_id": "element_20",
+      "primary_action": "click",
+      "description": "Click on the search icon to find an appointment.",
+      "secondary_actions": [
+        "click on 'Find an Appointment Time'",
+        "click on 'How Appointments Work' section"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1968,
+        "y": 120,
+        "width": 55,
+        "height": 59
+      },
+      "center": {
+        "x": 1995,
+        "y": 149
+      }
+    },
+    {
+      "element_id": "element_22",
+      "primary_action": "click",
+      "description": "Click on the search icon to find an appointment.",
+      "secondary_actions": [
+        "click on 'Find an Appointment Time'",
+        "scroll down to read more about appointments"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 1974,
+        "y": 127,
+        "width": 39,
+        "height": 44
+      },
+      "center": {
+        "x": 1993,
+        "y": 149
+      }
+    }
+  ],
+  "processing_time_s": 60.59447693824768
+}

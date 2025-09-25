@@ -1,0 +1,91 @@
+{
+  "summary": "The site is a government service page for the Virginia Department of Motor Vehicles (VADMV), likely providing services related to vehicle registration, driver's licenses, and other motor vehicle-related matters.",
+  "affordance": [
+    "Get In Line Today",
+    "Book an Appointment",
+    "View Orders - Orders",
+    "Search Products - Search bar",
+    "Manage Account - Account",
+    "View Delivery Location - Delivery location",
+    "Manage Cart - Cart"
+  ],
+  "elements": [
+    {
+      "element_id": "element_1",
+      "primary_action": "click",
+      "description": "Book an appointment at VADMV",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 752,
+        "y": 419,
+        "width": 669,
+        "height": 91
+      },
+      "center": {
+        "x": 1086,
+        "y": 464
+      }
+    },
+    {
+      "element_id": "element_0",
+      "primary_action": "click",
+      "description": "Click to get in line today.",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 81,
+        "y": 420,
+        "width": 666,
+        "height": 90
+      },
+      "center": {
+        "x": 414,
+        "y": 465
+      }
+    },
+    {
+      "element_id": "element_2",
+      "primary_action": "click",
+      "description": "Click on the DMV logo to navigate to the main page.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 563,
+        "y": 41,
+        "width": 378,
+        "height": 129
+      },
+      "center": {
+        "x": 752,
+        "y": 105
+      }
+    },
+    {
+      "element_id": "element_3",
+      "primary_action": "click",
+      "description": "Click on the Home icon to navigate to the homepage.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 459,
+        "y": 200,
+        "width": 158,
+        "height": 86
+      },
+      "center": {
+        "x": 538,
+        "y": 243
+      }
+    }
+  ],
+  "processing_time_s": 10.051380395889282
+}

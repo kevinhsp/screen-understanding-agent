@@ -1,0 +1,223 @@
+{
+  "summary": "The page is from the Virginia Department of Motor Vehicles, displaying options for service appointments such as E-ZPass, Hazmat Fingerprint, Learner's Permit, Motorcycle Skills Testing, and Road Skills Testing. The top navigation includes account, orders, cart, delivery location, and a search bar.",
+  "affordance": [
+    "Select E-ZPass Appointments",
+    "Select Hazmat Fingerprint / Background Check Appointments",
+    "Select Learner's Permit / Knowledge Test Appointments",
+    "Select Motorcycle Skills Testing Appointments",
+    "Select Road Skills Testing Appointments",
+    "Click Back to return to previous page"
+  ],
+  "elements": [
+    {
+      "element_id": "element_10",
+      "primary_action": "click",
+      "description": "Select a service type",
+      "secondary_actions": [
+        "Navigate to next step"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 122,
+        "y": 363,
+        "width": 1142,
+        "height": 248
+      },
+      "center": {
+        "x": 693,
+        "y": 487
+      }
+    },
+    {
+      "element_id": "element_8",
+      "primary_action": "type",
+      "description": "Type text into the input field",
+      "secondary_actions": [
+        "click"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 99,
+        "y": 606,
+        "width": 1127,
+        "height": 212
+      },
+      "center": {
+        "x": 662,
+        "y": 712
+      }
+    },
+    {
+      "element_id": "element_0",
+      "primary_action": "click",
+      "description": "Select Hazmat Fingerprint / Background Check Appointments",
+      "secondary_actions": [
+        "Navigate back"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 752,
+        "y": 877,
+        "width": 669,
+        "height": 129
+      },
+      "center": {
+        "x": 1086,
+        "y": 941
+      }
+    },
+    {
+      "element_id": "element_1",
+      "primary_action": "click",
+      "description": "Select E-ZPass Appointments",
+      "secondary_actions": [
+        "Navigate to E-ZPass Appointments"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 82,
+        "y": 878,
+        "width": 662,
+        "height": 128
+      },
+      "center": {
+        "x": 413,
+        "y": 942
+      }
+    },
+    {
+      "element_id": "element_2",
+      "primary_action": "click",
+      "description": "Select Road Skills Testing Appointments",
+      "secondary_actions": [
+        "Navigate back"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 750,
+        "y": 1117,
+        "width": 672,
+        "height": 91
+      },
+      "center": {
+        "x": 1086,
+        "y": 1162
+      }
+    },
+    {
+      "element_id": "element_4",
+      "primary_action": "click",
+      "description": "Select Motorcycle Skills Testing Appointments",
+      "secondary_actions": [
+        "Navigate back"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 752,
+        "y": 1015,
+        "width": 669,
+        "height": 91
+      },
+      "center": {
+        "x": 1086,
+        "y": 1060
+      }
+    },
+    {
+      "element_id": "element_3",
+      "primary_action": "click",
+      "description": "Open Other Service Appointments section",
+      "secondary_actions": [
+        "Navigate back"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 81,
+        "y": 1117,
+        "width": 665,
+        "height": 91
+      },
+      "center": {
+        "x": 413,
+        "y": 1162
+      }
+    },
+    {
+      "element_id": "element_6",
+      "primary_action": "click",
+      "description": "Select Learner's Permit / Knowledge Test Appointments",
+      "secondary_actions": [
+        "Navigate back"
+      ],
+      "confidence": 0.9,
+      "bbox": {
+        "x": 84,
+        "y": 1017,
+        "width": 665,
+        "height": 89
+      },
+      "center": {
+        "x": 416,
+        "y": 1061
+      }
+    },
+    {
+      "element_id": "element_7",
+      "primary_action": "click",
+      "description": "Click on the DMV logo to navigate back to the homepage.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 564,
+        "y": 41,
+        "width": 375,
+        "height": 128
+      },
+      "center": {
+        "x": 751,
+        "y": 105
+      }
+    },
+    {
+      "element_id": "element_5",
+      "primary_action": "click",
+      "description": "Navigate back to previous page",
+      "secondary_actions": [
+        "none"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 81,
+        "y": 1306,
+        "width": 311,
+        "height": 82
+      },
+      "center": {
+        "x": 236,
+        "y": 1347
+      }
+    },
+    {
+      "element_id": "element_9",
+      "primary_action": "click",
+      "description": "Click on the 'Home' button to navigate back to the main page.",
+      "secondary_actions": [
+        "navigate"
+      ],
+      "confidence": 1.0,
+      "bbox": {
+        "x": 467,
+        "y": 200,
+        "width": 148,
+        "height": 90
+      },
+      "center": {
+        "x": 541,
+        "y": 245
+      }
+    }
+  ],
+  "processing_time_s": 26.67221426963806
+}

@@ -1,0 +1,22 @@
+{
+  "plan": "Click 'Find an Appointment Time' to open the appointment scheduling interface, then click 'Reserve your spot for an appointment' to schedule the car knowledge test.",
+  "success_criteria": [
+    "Appointment scheduled for car knowledge test"
+  ],
+  "steps": [
+    {
+      "element_id": "element_10",
+      "actions": [
+        "click"
+      ],
+      "details": "Open the appointment scheduling page."
+    },
+    {
+      "element_id": "element_12",
+      "actions": [
+        "click"
+      ],
+      "details": "Reserve a spot for the car knowledge test appointment."
+    }
+  ]
+}

@@ -15,7 +15,11 @@ This project is a prototype Digital World Agent. It takes a raw UI screenshot an
 Custom prompting & algorithmic heuristics: Specially designed task-specific prompts and logic rules significantly improve reliability, beyond naïve model calls.
 ---
 
-## Demo
+## General Thought about Digital World Understanding
+
+To enable a system to “understand the digital world like humans,” it must jointly model the local (what each element looks like, its attributes, and affordances) and the global/relational aspects (semantic, spatial, and functional relationships among elements and their relevance to the task goal), and integrate them into a unified representation for reasoning, planning, and acting—simply recognizing individual elements is not enough. This project is a start of a possible experimental implementation. 
+
+## One Step Task Demo
 
 - Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
 - Session folder: `pipeline_outputs/sessions/session_20250924_151105`
@@ -42,6 +46,27 @@ Custom prompting & algorithmic heuristics: Specially designed task-specific prom
 - More outputs (JSON, images) are available in `pipeline_outputs/sessions/session_20250924_151105`.
 
 - Note: The outputs are not just raw model results. Each step involves custom prompting strategies and additional algorithms to refine element selection, enforce task constraints, and ensure robustness.
+---
+
+## Multi‑Step Task Demo
+
+- Session folder: `pipeline_outputs/sessions/session_20250925_165550`
+- Preview (per‑step thinking actions):
+
+Step 1
+
+![Step 1 Thinking Actions](pipeline_outputs/sessions/session_20250925_165550/step_1/step_1_thinking_actions.png)
+
+Step 2
+
+![Step 2 Thinking Actions](pipeline_outputs/sessions/session_20250925_165550/step_2/step_2_thinking_actions.png)
+
+Step 3
+
+![Step 3 Thinking Actions](pipeline_outputs/sessions/session_20250925_165550/step_3/step_3_thinking_actions.png)
+
+More outputs (JSON, images) are available under the same session directory.
+
 ---
 
 ## Installation
@@ -108,36 +133,11 @@ Alternative (one-off image via `pipeline.py`) writes under `pipeline_outputs/`:
 - `<image>_element_actions.png`
 - `<image>_decision.json` (when `DW`/`DW_TASK` is set)
 
-Example `step_N_decision.json`:
-```json
-{
-  "task": "Select LAX as departure city",
-  "decision": {
-    "thoughts": "Prefer the From field labeled LAX.",
-    "element_id": "element_12",
-    "action": "click",
-    "model": "openai/gpt-oss-20b"
-  }
-}
-```
-
----
-
-
-## Notes
-- First run may download models from Hugging Face. Optional cache path:
-  ```bash
-  export HF_HOME=./models/huggingface
-  ```
-- Change the VLM in code via `ProcessingConfig.vlm_model_name`.
-- `DW` and `DW_TASK` are interchangeable environment variables.
-
 ---
 
 ## Why This Matters
 This pipeline is a first step towards robust Digital World AI agents:
-- Perception + Reasoning + (Optional) Action Selection
-- Transparent reasoning traces (inspectable CoT)
+- Perception + Reasoning + Action Selection
 - Extensible to real automation (Playwright / Appium adapters)
 
 It is designed to be:
@@ -151,7 +151,9 @@ It is designed to be:
 - Current element detection (OmniParser) has limited coverage on diverse UIs
 - VLM struggles with fine-grained text-element alignment
 - LLM reasoning requires fine-tuning for robustness
-- Next step: explore reinforcement learning and better multimodal alignment
+- Next step: improve better cross-modal alignment (understand actionable elements with its parent structure and parent's parent structure until the whole page)
+- Transfer page info with actions and elements into sequence representaion, send to nn, output actions and updated the network. Save them into hidden state/cache. Then reinput new page with cache until output 'end signal'.
+- reinforce learning 
 
 ---
 
@@ -163,4 +165,3 @@ Third-party components retain their own licenses:
 - VLM (e.g., `Qwen/Qwen2.5-VL`): Qwen Model License (Alibaba)
 - Decision model (e.g., `openai/gpt-oss-20b`): see model card/license
 - OCR (PaddleOCR/PaddlePaddle): Apache-2.0
-

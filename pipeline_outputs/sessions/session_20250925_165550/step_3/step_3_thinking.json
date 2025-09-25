@@ -1,0 +1,15 @@
+{
+  "plan": "Click the 'Book an appointment at VADMV' button to finalize scheduling the car knowledge test appointment.",
+  "success_criteria": [
+    "Appointment confirmation page appears or confirmation message is displayed"
+  ],
+  "steps": [
+    {
+      "element_id": "element_6",
+      "actions": [
+        "click"
+      ],
+      "details": "Select Learner's Permit / Knowledge Test Appointments to book the car knowledge test."
+    }
+  ]
+}

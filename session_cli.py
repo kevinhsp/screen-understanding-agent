@@ -400,6 +400,50 @@ def main() -> int:
         except Exception:
             pass
 
+        # Incorporate previous step's planned steps into actions_history
+        # Assumption: by the time we start the next step, all steps from the previous thinking.json were executed.
+        try:
+            if step > 1:
+                prev_step = step - 1
+                prev_think_path = session_dir / f"step_{prev_step}" / f"step_{prev_step}_thinking.json"
+                if prev_think_path.exists():
+                    try:
+                        prev_thinking_obj = json.loads(prev_think_path.read_text(encoding="utf-8"))
+                    except Exception:
+                        prev_thinking_obj = None
+                    if isinstance(prev_thinking_obj, dict):
+                        prev_steps = prev_thinking_obj.get("steps") or []
+                        # Build a quick dedupe set over (element_id, action)
+                        seen_pairs = set(
+                            (str(it.get("element_id") or ""), str(it.get("action") or ""))
+                            for it in actions_history if isinstance(it, dict)
+                        )
+                        for st in prev_steps:
+                            if not isinstance(st, dict):
+                                continue
+                            eid = str(st.get("element_id") or "").strip()
+                            details = str(st.get("details") or "")
+                            actions = st.get("actions")
+                            if isinstance(actions, list):
+                                acts = [str(a) for a in actions if isinstance(a, (str, int, float))]
+                            elif actions is None:
+                                acts = []
+                            else:
+                                acts = [str(actions)]
+                            for act in acts:
+                                pair = (eid, str(act))
+                                if eid and act and pair not in seen_pairs:
+                                    actions_history.append({
+                                        "step": prev_step,
+                                        "element_id": eid,
+                                        "action": str(act),
+                                        "note": details,
+                                    })
+                                    seen_pairs.add(pair)
+        except Exception:
+            # Non-fatal; continue without augmenting history
+            pass
+
         # 7) Planning (pre-decision): produce/update thinking plan based on current UI and history
         thinking_obj = {}
         try:
@@ -457,6 +501,21 @@ def main() -> int:
                 decision_obj = {"error": f"decision failed: {e}"}
 
             Path(dec_path).write_text(json.dumps({"task": task, "decision": decision_obj}, ensure_ascii=False, indent=2), encoding="utf-8")
+
+            # Update actions_history with the decided action for this step
+            try:
+                if isinstance(decision_obj, dict):
+                    el = str(decision_obj.get("element_id") or "").strip()
+                    act = str(decision_obj.get("action") or "").strip()
+                    if el and act and act.lower() != "none":
+                        actions_history.append({
+                            "step": step,
+                            "element_id": el,
+                            "action": act,
+                            "thoughts": str(decision_obj.get("thoughts") or ""),
+                        })
+            except Exception:
+                pass
 
 
         # Save rolling history for convenience

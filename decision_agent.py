@@ -320,6 +320,9 @@ class DecisionAgent:
         lines.append("- Use ONLY elements listed below; do NOT invent element ids.")
         lines.append("- Include a step ONLY if it clearly advances the Task.")
         lines.append("- Avoid speculative language (e.g., 'maybe', 'try', 'guess'). Keep details concise.")
+        lines.append("- Update the previous plan: drop completed steps, keep still-relevant steps, and propose the next 1-3 steps.")
+        lines.append("- Assume all previously planned or executed steps have succeeded; continue from there.")
+        lines.append("- Do NOT repeat previously planned steps or any prior (element_id, action).")
         lines.append("- If nothing applicable or the screen blocks progress, set steps=[] and make plan start with 'BLOCKED: <reason>'.")
         if actions_history:
             lines.append("- Assume previous steps succeeded; DO NOT repeat any prior (element_id, action).")
@@ -341,6 +344,33 @@ class DecisionAgent:
         if prev_thinking:
             lines.append("Previous Plan (last step):")
             lines.append(str(prev_thinking).strip())
+            # Summary of previous plan and steps for continuity
+            try:
+                _s = str(prev_thinking).strip()
+                _i = _s.find('{'); _j = _s.rfind('}')
+                _payload = _s[_i:_j+1] if (_i != -1 and _j != -1 and _j > _i) else _s
+                _obj = json.loads(_payload)
+            except Exception:
+                _obj = None
+            if isinstance(_obj, dict):
+                _plan_txt = str(_obj.get('plan') or '').strip()
+                if _plan_txt:
+                    lines.append("Previous Plan Summary:")
+                    lines.append(_plan_txt)
+                _steps_in = _obj.get('steps') or []
+                if isinstance(_steps_in, list) and _steps_in:
+                    lines.append("Previously Planned Steps (assume completed):")
+                    for _idx2, _it in enumerate(_steps_in, 1):
+                        if isinstance(_it, dict):
+                            _eid = str(_it.get('element_id') or '')
+                            _actions = _it.get('actions')
+                            if isinstance(_actions, list):
+                                _acts_txt = ",".join([str(a) for a in _actions])
+                            elif _actions is None:
+                                _acts_txt = ""
+                            else:
+                                _acts_txt = str(_actions)
+                            lines.append(f"- step {_idx2}: {_eid} [{_acts_txt}]")
             lines.append("")
 
         # Current UI summary and affordances
@@ -447,7 +477,7 @@ class DecisionAgent:
         results["steps"] = copy.deepcopy(steps_out) if isinstance(steps_out, list) else []
         return results
 
-    def plan(self, understanding: Dict[str, Any], task: str, *, actions_history: Optional[List[Dict[str, Any]]] = None, prev_thinking: Optional[str] = None, max_new_tokens: int = 1200) -> Dict[str, Any]:
+    def plan(self, understanding: Dict[str, Any], task: str, *, actions_history: Optional[List[Dict[str, Any]]] = None, prev_thinking: Optional[str] = None, max_new_tokens: int = 2400) -> Dict[str, Any]:
         ctx = self._sanitize(understanding)
         prompt = self._build_plan_prompt(task, ctx, actions_history=actions_history, prev_thinking=prev_thinking)
         model_device = torch.device('cuda' if self.device == 'cuda' else 'cpu')

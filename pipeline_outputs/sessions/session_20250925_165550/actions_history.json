@@ -1,0 +1,20 @@
+[
+  {
+    "step": 1,
+    "element_id": "element_10",
+    "action": "click",
+    "note": "Open the appointment scheduling page."
+  },
+  {
+    "step": 1,
+    "element_id": "element_12",
+    "action": "click",
+    "note": "Reserve a spot for the car knowledge test appointment."
+  },
+  {
+    "step": 2,
+    "element_id": "element_1",
+    "action": "click",
+    "note": "Click the button to proceed to the appointment scheduling interface and confirm the reservation."
+  }
+]
