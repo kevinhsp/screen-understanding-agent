@@ -7,12 +7,12 @@ This project is a prototype Digital World Agent. It takes a raw UI screenshot an
 ## Features
 - Screen parsing: detect UI elements (YOLO/OmniParser) + OCR
 - Action semantics: VLM (default: Qwen2-VL) infers likely actions and summarizes the page
-- Decision agent (optional): an LLM (default: GPT-OSS-20B) selects one best element+action for a task with a transparent thinking trace
+- Decision agent: an LLM (default: GPT-OSS-20B) selects one best element+action for a task with a transparent thinking trace
 - Outputs:
   - Annotated screenshot (`element_actions.png`)
   - Structured JSON with elements + actions (`_output.json`)
   - Decision reasoning trace (`_decision.json`)
-
+Custom prompting & algorithmic heuristics: Specially designed task-specific prompts and logic rules significantly improve reliability, beyond naïve model calls.
 ---
 
 ## Demo
@@ -41,6 +41,7 @@ This project is a prototype Digital World Agent. It takes a raw UI screenshot an
 
 - More outputs (JSON, images) are available in `pipeline_outputs/sessions/session_20250924_151105`.
 
+- Note: The outputs are not just raw model results. Each step involves custom prompting strategies and additional algorithms to refine element selection, enforce task constraints, and ensure robustness.
 ---
 
 ## Installation
