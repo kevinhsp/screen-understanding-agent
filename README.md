@@ -19,7 +19,7 @@ Custom prompting & algorithmic heuristics: Specially designed task-specific prom
 
 To enable a system to “understand the digital world like humans,” it must jointly model the local (what each element looks like, its attributes, and affordances) and the global/relational aspects (semantic, spatial, and functional relationships among elements and their relevance to the task goal), and integrate them into a unified representation for reasoning, planning, and acting—simply recognizing individual elements is not enough. This project is a start of a possible experimental implementation. 
 
-## One Step Task Demo
+## Same Page Demo
 
 - Task: `find flights from boston to la on 2025/10/5 and back on 2025/10/8`
 - Session folder: `pipeline_outputs/sessions/session_20250924_151105`
@@ -48,8 +48,9 @@ To enable a system to “understand the digital world like humans,” it must jo
 - Note: The outputs are not just raw model results. Each step involves custom prompting strategies and additional algorithms to refine element selection, enforce task constraints, and ensure robustness.
 ---
 
-## Multi‑Step Task Demo
+## Cross Page Demo
 
+- Task: `schedule an appointment for car knowledge test.`
 - Session folder: `pipeline_outputs/sessions/session_20250925_165550`
 - Preview (per‑step thinking actions):
 
