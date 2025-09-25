@@ -17,7 +17,6 @@ To enable a system to “understand the digital world like humans,” it must jo
 - Planning agent: history‑aware, updates prior plan, assumes earlier steps done; outputs plan/steps/success_criteria; renders thinking_actions overlay.
 - Decision agent: selects next element+action with safety rules; avoids repeats via actions_history; robust fallbacks when uncertain.
 - Session runner: interactive multi‑step flow, thinking‑only mode, per‑step artifacts, auto‑append previous step’s planned steps to actions_history, resume script to index steps.
-- Persistent IDs: track elements across screenshots via grid/text/dhash/IoU for stability.
 - Configurable models: switch weights/IDs via env; GPU/CPU friendly; tunable thresholds.
 - Rich outputs: JSON and annotated images for understanding, actions, thinking, and decisions.
 
