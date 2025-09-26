@@ -88,28 +88,6 @@ weights/icon_detect/model.pt
 
 ---
 
-## Notes: OCR and Quantization Dependencies
-
-- OCR backends
-  - Tesseract (recommended): install the system binary, then the Python wrapper.
-    - Windows: install Tesseract from https://github.com/UB-Mannheim/tesseract/wiki and ensure `tesseract.exe` is on PATH. Optionally set `TESSDATA_PREFIX` to your `tessdata` folder.
-    - macOS: `brew install tesseract`.
-    - Linux: `sudo apt-get install tesseract-ocr` (package name may vary).
-    - Python: `pytesseract` is included in the env; the pipeline will auto-pick it via `HybridOCRProcessor`.
-  - EasyOCR: installed via pip and used automatically when available.
-
-- PyTorch and CUDA
-  - The environment targets PyTorch >= 2.8 with CUDA 12.x. If you use a different CUDA runtime, adjust `pytorch-cuda` in `environment.yml` accordingly, or remove it for CPU-only.
-
-- MXFP4 quantization
-  - The `kernels` package is included in the environment to satisfy MXFP4 kernel requirements:
-    ```bash
-    pip install kernels
-    ```
-  - If you still encounter: "MXFP4 quantization requires triton >= 3.4.0 and kernels installed", your platform may also require Triton (often Linux-only wheels). Install as needed per your setup.
-
----
-
 ## Quickstart (Sessions)
 
 - All platforms:
