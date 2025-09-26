@@ -9,11 +9,12 @@ dependencies:
   - python=3.9
   
   # PyTorch and CUDA
-  - pytorch>=2.1.0
-  - torchvision>=0.16.0
-  - torchaudio>=2.1.0
-  - pytorch-cuda=11.8  # Adjust based on your CUDA version
-  - cudatoolkit=11.8
+  - pytorch>=2.8.0
+  - torchvision>=0.19.0
+  - torchaudio>=2.8.0
+  # NOTE: Match this to your installed CUDA runtime. For modern drivers,
+  # CUDA 12.x is recommended. If you use CPU-only, remove pytorch-cuda.
+  - pytorch-cuda=12.1  # Adjust based on your CUDA version
   
   # Core scientific packages
   - numpy>=1.24.0
@@ -51,9 +52,15 @@ dependencies:
     - paddlepaddle>=2.5.0
     - paddleocr>=2.7.0
     
+    # Additional OCR backends (optional but recommended)
+    - pytesseract>=0.3.10
+    - easyocr>=1.7.1
+    
     # Additional ML packages
     - einops>=0.7.0
     - timm>=0.9.12
+    # MXFP4 kernels package
+    - kernels>=0.10.0
     
     # Utilities
     - pydantic>=2.5.0

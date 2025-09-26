@@ -9,8 +9,9 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-torch = "^2.1.0"
-torchvision = "^0.16.0"
+torch = ">=2.8.0"
+torchvision = ">=0.19.0"
+torchaudio = ">=2.8.0"
 transformers = "^4.36.0"
 pillow = "^10.1.0"
 numpy = "^1.24.0"
@@ -31,6 +32,13 @@ einops = "^0.7.0"
 timm = "^0.9.12"
 nest-asyncio = "^1.5.8"
 ultralytics = "^8.1.0"
+
+# Optional OCR backends
+pytesseract = "^0.3.10"
+easyocr = "^1.7.1"
+
+# MXFP4 kernels package
+kernels = ">=0.10.0"
 
 
 [tool.poetry.group.dev.dependencies]
