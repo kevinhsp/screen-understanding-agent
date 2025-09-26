@@ -74,7 +74,7 @@ More outputs (JSON, images) are available under the same session directory.
 ---
 
 ## Installation
-Prereqs: Python 3.9, Conda. GPU strongly recommended.
+Prereqs: Python 3.10+, Conda. GPU strongly recommended.
 
 ```bash
 conda env create -f environment.yml
