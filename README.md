@@ -152,12 +152,12 @@ It is designed to be:
 ---
 
 ## Limitations & Future Work
-- Current element detection (OmniParser) has limited coverage on diverse UIs
+- Current element detection (OmniParser) has limited coverage on diverse UIs -- develop better GUI grounding models
 - VLM struggles with fine-grained text-element alignment
 - LLM reasoning requires fine-tuning for robustness
-- Next step: improve better cross-modal alignment (understand actionable elements with its parent structure and parent's parent structure until the whole page)
-- Transfer page info with actions and elements into sequence representaion, send to nn, output actions and updated the network. Save them into hidden state/cache. Then reinput new page with cache until output 'end signal'.
-- reinforce learning 
+- Next step: advance cross-modal alignment through hierarchical reasoning, capturing actionable elements together with their parent and higher-order structural dependencies until the entire page is represented.
+- Page information, along with associated actions and elements, is transformed into a sequence representation and processed by the neural network. The model produces actions while updating its latent state, which is preserved in a hidden cache. Subsequent pages are re-encoded jointly with this cache, iterating until the network emits an explicit termination signal.
+- Incorporate reinforcement learning to refine and adapt the current best-performing models.
 
 ---
 
