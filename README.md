@@ -81,15 +81,7 @@ conda env create -f environment.yml
 conda activate screen-understanding
 ```
 
-Exact replica (from a known-good setup)
-- A fully pinned lock file is provided at `environment.lock.yml` (generated from a working machine).
-- Use this when you want the closest replica of that environment:
-```bash
-conda env create -f environment.lock.yml
-conda activate screen-understanding-locked
-```
-Note: the lock uses Linux CUDA 12.x runtime packages and pip Torch 2.8.0 with Triton/kernels.
-On Windows, some pip CUDA/Triton wheels are unavailable.
+
 
 Place YOLO weights at:
 ```
