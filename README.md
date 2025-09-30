@@ -81,6 +81,16 @@ conda env create -f environment.yml
 conda activate screen-understanding
 ```
 
+Exact replica (from a known-good setup)
+- A fully pinned lock file is provided at `environment.lock.yml` (generated from a working machine).
+- Use this when you want the closest replica of that environment:
+```bash
+conda env create -f environment.lock.yml
+conda activate screen-understanding-locked
+```
+Note: the lock uses Linux CUDA 12.x runtime packages and pip Torch 2.8.0 with Triton/kernels.
+On Windows, some pip CUDA/Triton wheels are unavailable.
+
 Place YOLO weights at:
 ```
 weights/icon_detect/model.pt
@@ -92,8 +102,8 @@ weights/icon_detect/model.pt
 
 - All platforms:
   - Run: `python session_cli.py`
-  - Enter your task when prompted. The tool creates `pipeline_outputs/sessions/session_YYYYMMDD_HHMMSS/`.
-  - Drop screenshots named `1.png`, `2.png`, ... into that session folder and press Enter to advance.
+  - Enter your task. The tool creates `pipeline_outputs/sessions/session_YYYYMMDD_HHMMSS/`.
+  - Drop screenshots named `1.png`, `2.png`, ... into that session folder and press Enter to continue.
 
 - Optional env vars:
   - `DECIDER_MODEL`: decision model id (default `openai/gpt-oss-20b`).
