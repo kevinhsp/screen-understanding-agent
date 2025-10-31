@@ -9,7 +9,7 @@ import numpy as np
 
 
 class ScreenType(Enum):
-    """Screen type enumerations"""
+    """Screen type enumeration"""
     LOGIN = "login"
     DASHBOARD = "dashboard"
     FORM = "form"
