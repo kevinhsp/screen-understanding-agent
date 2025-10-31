@@ -20,7 +20,7 @@ from models import ProcessingConfig
 from pipeline import ScreenUnderstandingPipeline
 
 
-RUN_REAL = os.environ.get("RUN_REAL_MODELS") == "1"
+
 
 
 def _annotate_one(image: Image.Image, el, action: dict):
@@ -55,7 +55,6 @@ def _annotate_one(image: Image.Image, el, action: dict):
     return img
 
 
-@pytest.mark.skipif(not RUN_REAL, reason="Set RUN_REAL_MODELS=1 to run real-model slow test")
 def test_single_element_action(tmp_path):
     t_total_start = time.perf_counter()
     img_path = Path(os.environ.get('IMAGE_PATH') or 'examples/amazon_sample.png')
